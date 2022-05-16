@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
@@ -38,15 +38,76 @@ const ProfileScreen = ({ navigation }) => {
 }
 
 const SignInScreen = ({ navigation }) => {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [errors, setErrors] = React.useState({email: '', password: ''});
   const { signIn } = React.useContext(AuthContext);
 
+  const handleSignIn = () => {
+    if (!email && !password) {
+      setErrors({
+        email: 'Email is required',
+        password: 'Password is required.'
+      });
+    } else if (!email) {
+      setErrors((prev) => ({
+        ...prev,
+        email: 'Email is required',
+      }));
+    } else if (!password) {
+      setErrors((prev) => ({
+        ...prev,
+        password: 'Password is required',
+      }));
+    } else if (email && password) {
+      signIn({email: email, password: password});
+    }
+  }
+
+  const clearError = () => {
+    setError('');
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Sign In</Text>
-      <Button title='Sign In' onPress={() => signIn()} />
-      <Button title='Sign Up' onPress={() => navigation.navigate('Sign Up')} />
-      <StatusBar style="auto" />
-    </View>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{flex: 1, backgroundColor: 'rgb(245,245,245)'}}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={formStyles.formWrapper}>
+          <View style={formStyles.fieldWrapper}>
+            <Text style={formStyles.label}>Email</Text>
+            { errors.email ? (
+              <Text style={formStyles.formError}>{errors.email}</Text>
+            ) : <></> }
+            <TextInput
+              style={formStyles.textInput}
+              keyboardType='email-address'
+              name='email' value={email}
+              onChangeText={setEmail}
+              onFocus={() => setErrors((prev) => ({...prev, email: ''}))}
+            />
+          </View>
+          <View style={formStyles.fieldWrapper}>
+            <Text style={formStyles.label}>Password</Text>
+            { errors.password ? (
+              <Text style={formStyles.formError}>{errors.password}</Text>
+            ) : <></> }
+            <TextInput
+              style={formStyles.textInput}
+              secureTextEntry={true}
+              name='password'
+              value={password}
+              onChangeText={setPassword}
+              onFocus={() => setErrors((prev) => ({...prev, password: ''}))}/>
+          </View>
+          <TouchableOpacity style={styles.button} title='Sign In' onPress={() => handleSignIn()}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+          <Button title='Sign Up' onPress={() => navigation.navigate('Sign Up')} />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -117,13 +178,14 @@ export default function App() {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (data) => {
+      signIn: (data) => {
+        console.log('Sign In data: ', data);
         dispatch({ type: 'SIGN_IN', token: 'dummy_toke' });
       },
-      signOut: async (data) => {
+      signOut: (data) => {
         dispatch({ type: 'SIGN_OUT' });
       },
-      signUp: async (data) => {
+      signUp: (data) => {
         dispatch({type: 'SIGN_IN', token: 'dummy_toke'});
       }
     }),
@@ -138,7 +200,7 @@ export default function App() {
             <Stack.Screen name="Splash" component={SplashScreen} />
           ) : authState.userToken === null ? (
             <>
-              <Stack.Screen name='Sign In' component={SignInScreen} />
+              <Stack.Screen name='Sign In' component={SignInScreen} options={{headerShown: false}}/>
               <Stack.Screen name='Sign Up' component={SignUpScreen} />
             </>
           ) : (
@@ -159,5 +221,48 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: '#25273d',
+    borderRadius: 6,
+    alignItems: 'center',
+    padding: 12,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+});
+
+const formStyles = StyleSheet.create({
+  formWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 32,
+    width: '100%',
+  },
+  formError: {
+    color: 'red',
+    marginBottom: 6,
+  },
+  fieldWrapper: {
+    alignItems: 'flex-start',
+    marginBottom: 24,
+    width: '100%',
+  },
+  label: {
+    marginBottom: 6,
+    fontWeight: 'bold',
+    color: 'rgb(150,150,150)',
+    textTransform: 'uppercase',
+  },
+  textInput: {
+    backgroundColor: '#FFFFFF',
+    padding: 12,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: 'rgb(120,120,120)',
+    borderRadius: 6,
+    width: '100%',
   },
 });
