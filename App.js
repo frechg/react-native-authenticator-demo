@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
   );
 }
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = (props) => {
   const { signOut } = React.useContext(AuthContext);
 
   return (
@@ -38,34 +38,38 @@ const ProfileScreen = ({ navigation }) => {
 }
 
 const SignInScreen = ({ navigation }) => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [errors, setErrors] = React.useState({email: '', password: ''});
+  const [formData, setFormData] = React.useState({email: '', password: ''});
+  const [errors, setErrors] = React.useState({email: '', password: '', other: ''});
   const { signIn } = React.useContext(AuthContext);
 
-  const handleSignIn = () => {
-    if (!email && !password) {
-      setErrors({
-        email: 'Email is required',
-        password: 'Password is required.'
-      });
-    } else if (!email) {
-      setErrors((prev) => ({
-        ...prev,
-        email: 'Email is required',
-      }));
-    } else if (!password) {
-      setErrors((prev) => ({
-        ...prev,
-        password: 'Password is required',
-      }));
-    } else if (email && password) {
-      signIn({email: email, password: password});
-    }
+  const handleTextChange = (text, type) => {
+    setFormData((prev) => ({
+      ...prev,
+      [type]: text,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [type]: '',
+    }));
   }
 
-  const clearError = () => {
-    setError('');
+  const handleSignIn = () => {
+    if (!formData.email || !formData.password ) {
+      setErrors((prev) => ({
+        ...prev,
+        email: !formData.email ? 'Email is required' : '',
+        password: !formData.password ? 'Password is required' : '',
+        other: ''
+      }));
+    } else {
+      signIn(formData).catch((error) => {
+        setErrors((prev) => ({
+          ...prev,
+          other: error.message
+        }));
+      });
+    }
   }
 
   return (
@@ -75,6 +79,9 @@ const SignInScreen = ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>
+          { errors.other ? (
+            <View><Text style={formStyles.formError}>{ errors.other }</Text></View>
+          ) : <></> }
           <View style={formStyles.fieldWrapper}>
             <Text style={formStyles.label}>Email</Text>
             { errors.email ? (
@@ -83,9 +90,8 @@ const SignInScreen = ({ navigation }) => {
             <TextInput
               style={formStyles.textInput}
               keyboardType='email-address'
-              name='email' value={email}
-              onChangeText={setEmail}
-              onFocus={() => setErrors((prev) => ({...prev, email: ''}))}
+              name='email' value={formData.email}
+              onChangeText={(text) => handleTextChange(text, 'email')}
             />
           </View>
           <View style={formStyles.fieldWrapper}>
@@ -97,9 +103,9 @@ const SignInScreen = ({ navigation }) => {
               style={formStyles.textInput}
               secureTextEntry={true}
               name='password'
-              value={password}
-              onChangeText={setPassword}
-              onFocus={() => setErrors((prev) => ({...prev, password: ''}))}/>
+              value={formData.password}
+              onChangeText={(text) => handleTextChange(text, 'password')}
+            />
           </View>
           <TouchableOpacity style={styles.button} title='Sign In' onPress={() => handleSignIn()}>
             <Text style={styles.buttonText}>Sign In</Text>
@@ -127,50 +133,47 @@ const SignUpScreen = ({ navigation }) => {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [authState, dispatch] = React.useReducer(
-    (prevState, action) => {
+  const [authState, authDispatch] = React.useReducer(
+    (state, action) => {
       switch(action.type) {
         case 'RESTORE_TOKEN':
           return {
-            ...prevState,
+            ...state,
             isLoading: false,
-            userToken: action.token
+            authToken: action.token
           };
         case 'SIGN_IN':
           return {
-            ...prevState,
+            ...state,
             isSignout: false,
-            userToken: action.token
+            authToken: action.token
           };
         case 'SIGN_OUT':
           return {
-            ...prevState,
+            ...state,
             isSignout: true,
-            userToken: null
+            authToken: null
           };
       }
     }, 
     {
       isLoading: true,
       isSignout: false,
-      userToken: null
+      authToken: null
     }
   );
 
   React.useEffect(() => {
+    // On initial app render, look for a saved userToken
     const bootstrapAsync = async () => {
-      let userToken;
-
-      // Try to retrieve a userToken from secureStorage
+      let token;
       try {
-        userToken = await SecureStore.getItemAsync('userToken');
-      } catch (e) {
-        // Handle retrevial error
-        console.error(e);
+        token = await SecureStore.getItemAsync('authToken');
+        console.log(token);
+        authDispatch({ type: 'RESTORE_TOKEN', token: token });
+      } catch (error) {
+        throw new Error(error);
       }
-
-      // Call dispatch to update the authState
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -178,15 +181,35 @@ export default function App() {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: (data) => {
-        console.log('Sign In data: ', data);
-        dispatch({ type: 'SIGN_IN', token: 'dummy_toke' });
+      signIn: async (data) => {
+        
+        const response = await fetch('http://192.168.1.13:3000/authenticate', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({user: { email: data.email, password: data.password }})
+        })
+
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          await SecureStore.setItemAsync('authToken', jsonResponse.token);
+          authDispatch({ type: 'SIGN_IN', token: jsonResponse.token });
+        } else {
+          throw new Error('Email or password are incorrect.');
+        }
       },
-      signOut: (data) => {
-        dispatch({ type: 'SIGN_OUT' });
+      signOut: async (data) => {
+        try {
+          await SecureStore.deleteItemAsync('authToken');
+          authDispatch({ type: 'SIGN_OUT' });
+        } catch (error) {
+          throw new Error(error);
+        }
       },
       signUp: (data) => {
-        dispatch({type: 'SIGN_IN', token: 'dummy_toke'});
+        console.log('Sign Up data: ', data);
+        authDispatch({type: 'SIGN_IN', token: 'dummy_token'});
       }
     }),
     []
@@ -198,15 +221,14 @@ export default function App() {
         <Stack.Navigator>
           { authState.isLoading ? (
             <Stack.Screen name="Splash" component={SplashScreen} />
-          ) : authState.userToken === null ? (
+          ) : authState.authToken === null ? (
             <>
               <Stack.Screen name='Sign In' component={SignInScreen} options={{headerShown: false}}/>
               <Stack.Screen name='Sign Up' component={SignUpScreen} />
             </>
           ) : (
             <>
-              <Stack.Screen name='Home' component={HomeScreen} />
-              <Stack.Screen name='Profile' component={ProfileScreen} />
+              <Stack.Screen name='Profile' component={ProfileScreen}/>
             </>
           )}
         </Stack.Navigator>
