@@ -118,15 +118,94 @@ const SignInScreen = ({ navigation }) => {
 }
 
 const SignUpScreen = ({ navigation }) => {
+  const [formData, setFormData] = React.useState({username: '', email: '', password: ''});
+  const [errors, setErrors] = React.useState({username: '', email: '', password: '', other: ''});
   const { signUp } = React.useContext(AuthContext);
 
+  const handleTextChange = (text, type) => {
+    setFormData((prev) => ({
+      ...prev,
+      [type]: text,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [type]: '',
+    }));
+  }
+
+  const handleSignUp = () => {
+    if (!formData.username || !formData.email || !formData.password ) {
+      setErrors((prev) => ({
+        ...prev,
+        username: !formData.username ? 'Username is required' : '',
+        email: !formData.email ? 'Email is required' : '',
+        password: !formData.password ? 'Password is required' : '',
+        other: ''
+      }));
+    } else {
+      signUp(formData).catch((error) => {
+        setErrors((prev) => ({
+          ...prev,
+          other: error.message
+        }));
+      });
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Sign Up</Text>
-      <Button title='Sign Up' onPress={() => signUp()} />
-      <Button title='Sign In' onPress={() => navigation.navigate('Sign In')} />
-      <StatusBar style="auto" />
-    </View>
+    <KeyboardAvoidingView 
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={{flex: 1, backgroundColor: 'rgb(245,245,245)'}}
+    >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={formStyles.formWrapper}>
+        { errors.other ? (
+          <View><Text style={formStyles.formError}>{ errors.other }</Text></View>
+        ) : <></> }
+        <View style={formStyles.fieldWrapper}>
+          <Text style={formStyles.label}>Username</Text>
+          { errors.username ? (
+            <Text style={formStyles.formError}>{errors.username}</Text>
+          ) : <></> }
+          <TextInput
+            style={formStyles.textInput}
+            name='username' value={formData.username}
+            onChangeText={(text) => handleTextChange(text, 'username')}
+          />
+        </View>
+        <View style={formStyles.fieldWrapper}>
+          <Text style={formStyles.label}>Email</Text>
+          { errors.email ? (
+            <Text style={formStyles.formError}>{errors.email}</Text>
+          ) : <></> }
+          <TextInput
+            style={formStyles.textInput}
+            keyboardType='email-address'
+            name='email' value={formData.email}
+            onChangeText={(text) => handleTextChange(text, 'email')}
+          />
+        </View>
+        <View style={formStyles.fieldWrapper}>
+          <Text style={formStyles.label}>Password</Text>
+          { errors.password ? (
+            <Text style={formStyles.formError}>{errors.password}</Text>
+          ) : <></> }
+          <TextInput
+            style={formStyles.textInput}
+            secureTextEntry={true}
+            name='password'
+            value={formData.password}
+            onChangeText={(text) => handleTextChange(text, 'password')}
+          />
+        </View>
+        <TouchableOpacity style={styles.button} title='Sign Up' onPress={() => handleSignUp()}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+        <Button title='Sign In' onPress={() => navigation.navigate('Sign In')} />
+      </View>
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
   );
 }
 
@@ -169,7 +248,6 @@ export default function App() {
       let token;
       try {
         token = await SecureStore.getItemAsync('authToken');
-        console.log(token);
         authDispatch({ type: 'RESTORE_TOKEN', token: token });
       } catch (error) {
         throw new Error(error);
@@ -207,9 +285,24 @@ export default function App() {
           throw new Error(error);
         }
       },
-      signUp: (data) => {
-        console.log('Sign Up data: ', data);
-        authDispatch({type: 'SIGN_IN', token: 'dummy_token'});
+      signUp: async (data) => {
+
+        const response = await fetch('http://192.168.1.13:3000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({new_user: { ...data }})
+        })
+
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          await SecureStore.setItemAsync('authToken', jsonResponse.token);
+          authDispatch({type: 'SIGN_IN', token: jsonResponse.token});
+        } else {
+          const jsonResponse = await response.json();
+          throw new Error(jsonResponse.errors[0])
+        }
       }
     }),
     []
