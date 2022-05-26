@@ -7,14 +7,27 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
+  buttonPrimary: {
     backgroundColor: '#25273d',
     borderRadius: 6,
     alignItems: 'center',
     padding: 12,
   },
-  buttonText: {
+  buttonPrimaryText: {
     color: '#FFFFFF',
+    fontSize: 18,
+  },
+  buttonSecondary: {
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#25273d',
+    borderRadius: 6,
+    alignItems: 'center',
+    padding: 12,
+    marginTop: 12,
+  },
+  buttonSecondaryText: {
+    color: '#25273d',
     fontSize: 18,
   },
 });

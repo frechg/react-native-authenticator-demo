@@ -95,10 +95,9 @@ export const SignUpScreen = ({ navigation }) => {
               onChangeText={(text) => handleTextChange(text, 'password')}
             />
           </View>
-          <TouchableOpacity style={styles.button} title='Sign Up' onPress={() => handleSignUp()}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+          <TouchableOpacity style={styles.buttonPrimary} title='Sign Up' onPress={() => handleSignUp()}>
+            <Text style={styles.buttonPrimaryText}>Sign Up</Text>
           </TouchableOpacity>
-          <Button title='Sign In' onPress={() => navigation.navigate('Sign In')} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

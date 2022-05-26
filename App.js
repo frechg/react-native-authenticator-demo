@@ -10,6 +10,7 @@ import { AuthContext } from './src/AuthProvider';
 
 import { SignInScreen } from './src/SignInScreen';
 import { SignUpScreen } from './src/SignUpScreen';
+import { ForgotPasswordScreen } from './src/ForgotPasswordScreen';
 import { ProfileScreen } from './src/ProfileScreen';
 
 const SplashScreen = () => {
@@ -132,7 +133,8 @@ export default function App() {
           ) : authState.authToken === null ? (
             <>
               <Stack.Screen name='Sign In' component={SignInScreen} options={{headerShown: false}}/>
-              <Stack.Screen name='Sign Up' component={SignUpScreen} options={{headerShown: false}}/>
+              <Stack.Screen name='Sign Up' component={SignUpScreen} />
+              <Stack.Screen name='Forgot Password' component={ForgotPasswordScreen} />
             </>
           ) : (
             <>

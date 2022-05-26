@@ -83,10 +83,15 @@ export const SignInScreen = ({ navigation }) => {
               onChangeText={(text) => handleTextChange(text, 'password')}
             />
           </View>
-          <TouchableOpacity style={styles.button} title='Sign In' onPress={() => handleSignIn()}>
-            <Text style={styles.buttonText}>Sign In</Text>
+          <TouchableOpacity style={styles.buttonPrimary} title='Sign In' onPress={() => handleSignIn()}>
+            <Text style={styles.buttonPrimaryText}>Sign In</Text>
           </TouchableOpacity>
-          <Button title='Sign Up' onPress={() => navigation.navigate('Sign Up')} />
+          <TouchableOpacity style={styles.buttonSecondary} title='Sign In' onPress={() => navigation.navigate('Sign Up')}>
+            <Text style={styles.buttonSecondaryText}>Sign Up</Text>
+          </TouchableOpacity>
+          <View style={{marginTop: 10, flexDirection: 'row', justifyContent: 'center'}}>
+            <Button title='Forgot Password' onPress={() => navigation.navigate('Forgot Password')} />
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
