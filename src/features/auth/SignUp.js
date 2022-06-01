@@ -29,7 +29,7 @@ export const SignUp = ({ navigation }) => {
     }));
   }
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (!formData.username || !formData.email || !formData.password ) {
       setErrors((prev) => ({
         ...prev,
@@ -39,7 +39,7 @@ export const SignUp = ({ navigation }) => {
         other: ''
       }));
     } else {
-      signUp(formData).catch((error) => {
+      await signUp(formData).catch((error) => {
         setErrors((prev) => ({
           ...prev,
           other: error.message

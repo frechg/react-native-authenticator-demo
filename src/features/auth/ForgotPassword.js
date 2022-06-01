@@ -9,12 +9,14 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
+import { AuthContext } from '../../common/contexts/AuthProvider';
 import { styles, formStyles } from '../../common/styles';
 
 export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
   const [formData, setFormData] = React.useState({email: ''});
   const [errors, setErrors] = React.useState({email: '', other: ''});
+  const { passwordReset } = React.useContext(AuthContext);
 
   const handleTextChange = (text, type) => {
     setFormData((prev) => ({
@@ -28,22 +30,6 @@ export const ForgotPassword = ({ navigation }) => {
     }));
   }
 
-  const requestPasswordReset = async (email) => {
-    const response = await fetch('http://192.168.1.8:3000/passwords', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({password: {email: email}})
-    })
-
-    if (response.ok) {
-      setRequestSuccess(true);
-    } else {
-      handleError('Sorry, something went wrong.');
-    }
-  }
-
   const handleError = (error) => {
     setErrors((prev) => ({
       ...prev,
@@ -51,7 +37,7 @@ export const ForgotPassword = ({ navigation }) => {
     }));
   }
 
-  const handlePasswordRequest = () => {
+  const handlePasswordReset = async () => {
     if (!formData.email) {
       setErrors((prev) => ({
         ...prev,
@@ -59,10 +45,18 @@ export const ForgotPassword = ({ navigation }) => {
         other: ''
       }));
     } else {
-      requestPasswordReset(formData.email)
+      const requestSent = await passwordReset(formData.email)
       .catch((error) => {
         handleError(error.message);
       });
+
+      console.log(requestSent);
+
+      if (requestSent) {
+        setRequestSuccess(true);
+      } else {
+        handleError('Sorry, something went wrong.');
+      }
     }
   }
 
@@ -93,7 +87,7 @@ export const ForgotPassword = ({ navigation }) => {
                 onChangeText={(text) => handleTextChange(text, 'email')}
               />
             </View>
-            <TouchableOpacity style={styles.buttonPrimary} title='Request Password Reset' onPress={() => handlePasswordRequest()}>
+            <TouchableOpacity style={styles.buttonPrimary} title='Request Password Reset' onPress={() => handlePasswordReset()}>
               <Text style={styles.buttonPrimaryText}>Request Password Reset</Text>
             </TouchableOpacity>
           </View>

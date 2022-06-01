@@ -30,7 +30,7 @@ export const SignIn = ({ navigation }) => {
     }));
   }
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     if (!formData.email || !formData.password ) {
       setErrors((prev) => ({
         ...prev,
@@ -39,7 +39,7 @@ export const SignIn = ({ navigation }) => {
         other: ''
       }));
     } else {
-      signIn(formData).catch((error) => {
+      await signIn(formData).catch((error) => {
         setErrors((prev) => ({
           ...prev,
           other: error.message

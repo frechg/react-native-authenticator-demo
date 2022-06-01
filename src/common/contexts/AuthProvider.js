@@ -95,8 +95,24 @@ const AuthProvider = (props) => {
     }
   };
 
+  const passwordReset = async (email) => {
+    const response = await fetch('http://192.168.1.8:3000/passwords', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({password: {email: email}})
+    })
+
+    if (response.ok) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const contextValue = React.useMemo(() => {
-    return {authState, getAuthState, signUp, signIn, signOut};
+    return {authState, getAuthState, signUp, signIn, signOut, passwordReset};
   }, [authState]);
 
   return (
