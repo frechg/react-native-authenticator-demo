@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StatusBar } from 'react-native';
-import { AuthContext } from './AuthProvider';
+import { styles } from '../common/styles';
+import { AuthContext } from '../common/contexts/AuthProvider';
 
 export const ProfileScreen = (props) => {
   const { signOut } = React.useContext(AuthContext);

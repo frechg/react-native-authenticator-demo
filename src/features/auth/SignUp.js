@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Text,
     View,
-    Button,
     TouchableOpacity,
     TextInput,
     TouchableWithoutFeedback,
@@ -10,10 +9,10 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { styles, formStyles } from './styles';
-import { AuthContext } from './AuthProvider';
+import { styles, formStyles } from '../../common/styles';
+import { AuthContext } from '../../common/contexts/AuthProvider';
 
-export const SignUpScreen = ({ navigation }) => {
+export const SignUp = ({ navigation }) => {
   const [formData, setFormData] = React.useState({username: '', email: '', password: ''});
   const [errors, setErrors] = React.useState({username: '', email: '', password: '', other: ''});
   const { signUp } = React.useContext(AuthContext);

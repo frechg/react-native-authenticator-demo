@@ -10,10 +10,10 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { styles, formStyles } from './styles';
-import { AuthContext } from './AuthProvider';
+import { styles, formStyles } from '../../common/styles';
+import { AuthContext } from '../../common/contexts/AuthProvider';
 
-export const SignInScreen = ({ navigation }) => {
+export const SignIn = ({ navigation }) => {
   const [formData, setFormData] = React.useState({email: '', password: ''});
   const [errors, setErrors] = React.useState({email: '', password: '', other: ''});
   const { signIn } = React.useContext(AuthContext);

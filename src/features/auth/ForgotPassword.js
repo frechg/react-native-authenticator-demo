@@ -9,9 +9,9 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { styles, formStyles } from './styles';
+import { styles, formStyles } from '../../common/styles';
 
-export const ForgotPasswordScreen = ({ navigation }) => {
+export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
   const [formData, setFormData] = React.useState({email: ''});
   const [errors, setErrors] = React.useState({email: '', other: ''});
@@ -28,6 +28,29 @@ export const ForgotPasswordScreen = ({ navigation }) => {
     }));
   }
 
+  const requestPasswordReset = async (email) => {
+    const response = await fetch('http://192.168.1.8:3000/passwords', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({password: {email: email}})
+    })
+
+    if (response.ok) {
+      setRequestSuccess(true);
+    } else {
+      handleError('Sorry, something went wrong.');
+    }
+  }
+
+  const handleError = (error) => {
+    setErrors((prev) => ({
+      ...prev,
+      other: error
+    }));
+  }
+
   const handlePasswordRequest = () => {
     if (!formData.email) {
       setErrors((prev) => ({
@@ -37,23 +60,9 @@ export const ForgotPasswordScreen = ({ navigation }) => {
       }));
     } else {
       requestPasswordReset(formData.email)
-    }
-  }
-
-  const requestPasswordReset = async (email) => {
-    const response = await fetch('http://192.168.1.13:3000/passwords', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({password: {email: email}})
-    })
-
-    if (response.ok) {
-      // Navigate to the sign in page and display a message
-      // Or, hide the form and display a success message
-    } else {
-      throw new Error('Sorry, something went wrong.');
+      .catch((error) => {
+        handleError(error.message);
+      });
     }
   }
 
