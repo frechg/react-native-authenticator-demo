@@ -3,7 +3,7 @@ import { View, Text, Button, StatusBar } from 'react-native';
 import { styles } from '../common/styles';
 import { AuthContext } from '../common/contexts/AuthProvider';
 
-export const ProfileScreen = (props) => {
+export const Profile = (props) => {
   const { signOut } = React.useContext(AuthContext);
 
   return (

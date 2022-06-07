@@ -1,10 +1,10 @@
 import React from 'react'
 import * as SecureStore from 'expo-secure-store';
-import { AUTH_API } from '../constants';
+import { FORGOT_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from '../constants';
 
 export const AuthContext = React.createContext();
 
-const AuthProvider = (props) => {
+export const AuthProvider = (props) => {
   const [authState, authDispatch] = React.useReducer(
     (state, action) => {
       switch(action.type) {
@@ -27,30 +27,31 @@ const AuthProvider = (props) => {
             ...state,
             isSignout: true,
             authToken: null,
-            username: ''
+            username: null
           };
       }
-    }, 
+    },
     {
       isLoading: true,
       isSignout: false,
       authToken: null,
-      username: ''
+      username: null
     }
   );
 
   const getAuthState = async () => {
+    console.log('getAuthState called!');
     try {
       const token = await SecureStore.getItemAsync('authToken');
       const username = await SecureStore.getItemAsync('username');
-      authDispatch({ type: 'RESTORE_TOKEN', token: token, username: username });
+      authDispatch({type: 'RESTORE_TOKEN', token: token, username: username});
     } catch (error) {
       throw new Error(error);
     }
   };
 
   const signIn = async (data) => {
-    const response = await fetch(AUTH_API.SIGN_IN, {
+    const response = await fetch(SIGN_IN_URL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -61,14 +62,14 @@ const AuthProvider = (props) => {
       const jsonResponse = await response.json();
       await SecureStore.setItemAsync('authToken', jsonResponse.token);
       await SecureStore.setItemAsync('username', jsonResponse.username);
-      authDispatch({ type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
+      authDispatch({type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
     } else {
       throw new Error('Email or password are incorrect.');
     }
   };
 
   const signUp = async (data) => {
-    const response = await fetch(AUTH_API.SIGN_UP, {
+    const response = await fetch(SIGN_UP_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -89,6 +90,7 @@ const AuthProvider = (props) => {
   const signOut = async () => {
     try {
       await SecureStore.deleteItemAsync('authToken');
+      await SecureStore.deleteItemAsync('username');
       authDispatch({type: 'SIGN_OUT'});
     } catch (error) {
       throw new Error(error);
@@ -96,7 +98,7 @@ const AuthProvider = (props) => {
   };
 
   const passwordReset = async (email) => {
-    const response = await fetch('http://192.168.1.8:3000/passwords', {
+    const response = await fetch(FORGOT_PASSWORD_URL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -120,6 +122,4 @@ const AuthProvider = (props) => {
       {props.children}
     </AuthContext.Provider>
   );
-}
-
-export default AuthProvider;
+};

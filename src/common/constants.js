@@ -1,5 +1,7 @@
-const HOST = 'http://192.168.1.8:3000';
-const SIGN_IN = `${HOST}/authenticate`;
-const SIGN_UP = `${HOST}/signup`;
+import Constants from 'expo-constants';
 
-export const AUTH_API = {SIGN_IN, SIGN_UP};
+const API_URL = Constants.manifest.extra.API_URL;
+
+export const SIGN_IN_URL = `${API_URL}/authenticate`;
+export const SIGN_UP_URL = `${API_URL}/signup`;
+export const FORGOT_PASSWORD_URL = `${API_URL}/passwords`;

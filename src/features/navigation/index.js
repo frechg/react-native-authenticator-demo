@@ -11,12 +11,10 @@ import { Profile } from '../Profile';
 
 const Stack = createNativeStackNavigator();
 
-const Navigation = (props) => {
-  const { authState, getAuthState } = React.useContext(AuthContext); 
+export const Navigation = (props) => {
+  const { authState } = React.useContext(AuthContext);
 
-  React.useEffect(() => {
-    getAuthState();
-  }, []);
+  console.log('Navigation authState:', authState);
 
   return (
     <NavigationContainer>
@@ -40,5 +38,3 @@ const Navigation = (props) => {
     </NavigationContainer>
   );
 }
-
-export default Navigation;
