@@ -14,8 +14,6 @@ const Stack = createNativeStackNavigator();
 export const Navigation = (props) => {
   const { authState } = React.useContext(AuthContext);
 
-  console.log('Navigation authState:', authState);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>

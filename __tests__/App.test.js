@@ -1,0 +1,20 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
+
+import App from '../App';
+
+jest.useFakeTimers(); // without this, _reactNative.BackHandler.addEventListener causes errors
+
+describe('<App />', () => {
+  it('has 1 child', () => {
+    let tree;
+    tree = renderer.create(<App />).toJSON();
+    expect(tree.children.length).toBe(1);
+  });
+
+  it('renders correctly', () => {
+    let tree;
+    tree = renderer.create(<App />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

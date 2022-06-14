@@ -40,7 +40,6 @@ export const AuthProvider = (props) => {
   );
 
   const getAuthState = async () => {
-    console.log('getAuthState called!');
     try {
       const token = await SecureStore.getItemAsync('authToken');
       const username = await SecureStore.getItemAsync('username');

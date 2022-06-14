@@ -11,7 +11,16 @@
     "test": "jest"
   },
   "jest": {
-    "preset": "jest-expo"
+    "testEnvironment": "jsdom",
+    "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.10",
@@ -30,7 +39,7 @@
     "react-native-web": "0.17.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
   },
   "private": true
 }
