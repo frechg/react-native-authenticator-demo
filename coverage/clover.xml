@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1654597749675" clover="3.2.0">
-  <project timestamp="1654597749675" name="All files">
+<coverage generated="1655886337446" clover="3.2.0">
+  <project timestamp="1655886337446" name="All files">
     <metrics statements="129" coveredstatements="34" conditionals="66" coveredconditionals="1" methods="53" coveredmethods="7" elements="248" coveredelements="42" complexity="0" loc="129" ncloc="129" packages="6" files="11" classes="11"/>
     <package name="react-native-authenticator-demo">
       <metrics statements="4" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
