@@ -66,7 +66,9 @@ export const SignIn = ({ navigation }) => {
             <TextInput
               style={formStyles.textInput}
               keyboardType='email-address'
-              name='email' value={formData.email}
+              name='email'
+              value={formData.email}
+              placeholder='Your email'
               onChangeText={(text) => handleTextChange(text, 'email')}
             />
           </View>
@@ -80,6 +82,7 @@ export const SignIn = ({ navigation }) => {
               secureTextEntry={true}
               name='password'
               value={formData.password}
+              placeholder='Your password'
               onChangeText={(text) => handleTextChange(text, 'password')}
             />
           </View>

@@ -7,7 +7,5 @@ jest.useFakeTimers(); // without this, _reactNative.BackHandler.addEventListener
 
 describe('<App />', () => {
   it('renders correctly', () => {
-    const {debug} =render(<App />);
-    debug();
   });
 });

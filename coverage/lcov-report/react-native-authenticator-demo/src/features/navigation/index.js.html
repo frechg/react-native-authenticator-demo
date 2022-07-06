@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,14 +111,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,7 +128,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,18 +148,18 @@ import { SignUp } from '../auth/SignUp';
 import { ForgotPassword } from '../auth/ForgotPassword';
 import { Profile } from '../Profile';
 &nbsp;
-const Stack = createNativeStackNavigator();
+const Stack = <span class="cstat-no" title="statement not covered" >createNativeStackNavigator();</span>
 &nbsp;
-export const Navigation = (props) =&gt; {
-  const { authState } = React.useContext(AuthContext);
+export const Navigation = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
+  const { authState } = <span class="cstat-no" title="statement not covered" >React.useContext(AuthContext);</span>
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;NavigationContainer&gt;
       &lt;Stack.Navigator&gt;
         { authState.isLoading ? (
           &lt;Stack.Screen name="Splash" component={Splash} /&gt;
         ) : authState.authToken === null ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >          &lt;&gt;</span>
+          &lt;&gt;
             &lt;Stack.Screen name='Sign In' component={SignIn} options={{headerShown: false}}/&gt;
             &lt;Stack.Screen name='Sign Up' component={SignUp} /&gt;
             &lt;Stack.Screen name='Forgot Password' component={ForgotPassword} /&gt;
@@ -167,7 +167,7 @@ export const Navigation = (props) =&gt; {
         ) : (
           &lt;&gt;
             &lt;Stack.Screen name='Profile'&gt;
-              { props =&gt; &lt;Profile {...props} userName={authState.username} /&gt; }
+              { <span class="fstat-no" title="function not covered" >pr</span>ops =&gt; <span class="cstat-no" title="statement not covered" >&lt;Profile {...props} userName={authState.username} /&gt; </span>}
             &lt;/Stack.Screen&gt;
           &lt;/&gt;
         )}
@@ -181,7 +181,7 @@ export const Navigation = (props) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jun 22 2022 16:39:38 GMT+0700 (Indochina Time)
+                at Wed Jul 06 2022 18:54:47 GMT+0800 (Central Indonesia Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
