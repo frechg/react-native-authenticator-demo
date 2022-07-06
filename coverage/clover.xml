@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657104887204" clover="3.2.0">
-  <project timestamp="1657104887204" name="All files">
-    <metrics statements="129" coveredstatements="22" conditionals="66" coveredconditionals="7" methods="53" coveredmethods="8" elements="248" coveredelements="37" complexity="0" loc="129" ncloc="129" packages="6" files="11" classes="11"/>
+<coverage generated="1657106702192" clover="3.2.0">
+  <project timestamp="1657106702192" name="All files">
+    <metrics statements="129" coveredstatements="24" conditionals="66" coveredconditionals="15" methods="53" coveredmethods="11" elements="248" coveredelements="50" complexity="0" loc="129" ncloc="129" packages="6" files="11" classes="11"/>
     <package name="react-native-authenticator-demo">
       <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="App.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/App.js">
@@ -91,7 +91,7 @@
       </file>
     </package>
     <package name="react-native-authenticator-demo.src.features.auth">
-      <metrics statements="66" coveredstatements="14" conditionals="51" coveredconditionals="7" methods="39" coveredmethods="8"/>
+      <metrics statements="66" coveredstatements="16" conditionals="51" coveredconditionals="15" methods="39" coveredmethods="11"/>
       <file name="ForgotPassword.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/features/auth/ForgotPassword.js">
         <metrics statements="22" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="15" count="0" type="stmt"/>
@@ -118,23 +118,23 @@
         <line num="90" count="0" type="stmt"/>
       </file>
       <file name="SignIn.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/features/auth/SignIn.js">
-        <metrics statements="18" coveredstatements="14" conditionals="16" coveredconditionals="7" methods="13" coveredmethods="8"/>
+        <metrics statements="18" coveredstatements="16" conditionals="16" coveredconditionals="15" methods="13" coveredmethods="11"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="33" count="4" type="stmt"/>
-        <line num="34" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="51" count="4" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
+        <line num="17" count="18" type="stmt"/>
+        <line num="18" count="18" type="stmt"/>
+        <line num="19" count="18" type="stmt"/>
+        <line num="21" count="18" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="27" count="10" type="stmt"/>
+        <line num="33" count="18" type="stmt"/>
+        <line num="34" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="51" count="18" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="86" count="5" type="stmt"/>
+        <line num="89" count="6" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
       </file>
