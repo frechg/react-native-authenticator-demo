@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657272391385" clover="3.2.0">
-  <project timestamp="1657272391385" name="All files">
-    <metrics statements="129" coveredstatements="30" conditionals="66" coveredconditionals="15" methods="53" coveredmethods="11" elements="248" coveredelements="56" complexity="0" loc="129" ncloc="129" packages="6" files="11" classes="11"/>
+<coverage generated="1657273074744" clover="3.2.0">
+  <project timestamp="1657273074744" name="All files">
+    <metrics statements="125" coveredstatements="34" conditionals="66" coveredconditionals="15" methods="52" coveredmethods="13" elements="243" coveredelements="62" complexity="0" loc="125" ncloc="125" packages="6" files="11" classes="11"/>
     <package name="react-native-authenticator-demo">
       <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="App.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/App.js">
@@ -19,23 +19,23 @@
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="constants.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/common/constants.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
       </file>
       <file name="styles.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/common/styles.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
       </file>
     </package>
     <package name="react-native-authenticator-demo.src.common.contexts">
       <metrics statements="44" coveredstatements="2" conditionals="9" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="AuthProvider.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/common/contexts/AuthProvider.js">
         <metrics statements="44" coveredstatements="2" conditionals="9" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="10" count="0" type="cond" truecount="0" falsecount="3"/>
         <line num="12" count="0" type="stmt"/>
@@ -91,7 +91,7 @@
       </file>
     </package>
     <package name="react-native-authenticator-demo.src.features.auth">
-      <metrics statements="66" coveredstatements="19" conditionals="51" coveredconditionals="15" methods="39" coveredmethods="11"/>
+      <metrics statements="62" coveredstatements="23" conditionals="51" coveredconditionals="15" methods="38" coveredmethods="13"/>
       <file name="ForgotPassword.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/features/auth/ForgotPassword.js">
         <metrics statements="22" coveredstatements="1" conditionals="14" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="15" count="1" type="stmt"/>
@@ -159,16 +159,12 @@
         <line num="97" count="0" type="stmt"/>
       </file>
       <file name="Splash.js" path="/Users/galenfrechette/Code/react-native-authenticator-demo/src/features/auth/Splash.js">
-        <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
       </file>
     </package>
     <package name="react-native-authenticator-demo.src.features.navigation">

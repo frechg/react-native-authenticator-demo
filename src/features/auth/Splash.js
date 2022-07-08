@@ -10,14 +10,6 @@ export const Splash = () => {
     getAuthState();
   }, []);
 
-  const handleAuthState = async () => {
-    try {
-      await getAuthState();
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
   return (
     <View style={styles.container}>
       <Text>Loading...</Text>
