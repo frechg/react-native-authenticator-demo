@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 
 import { SignIn } from '../SignIn';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
@@ -7,13 +7,13 @@ import { AuthContext } from '../../../common/contexts/AuthProvider';
 describe('<SignIn />', () => {
   test('Renders SignIn screen', () => {
     const signIn = jest.fn();    
-    const { toJSON, debug } = render(
+    render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
     );
 
-    expect(toJSON()).toMatchSnapshot();
+    expect(screen.toJSON()).toMatchSnapshot();
   });
 
   test('User submits form with valid authorization data', () => {
