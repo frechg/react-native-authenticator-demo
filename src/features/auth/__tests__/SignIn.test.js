@@ -5,27 +5,18 @@ import { SignIn } from '../SignIn';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
 
 describe('<SignIn />', () => {
-  test('Renders expected UI', () => {
-
-    // Convert to a snapshot test?
-
+  test('Renders SignIn screen', () => {
     const signIn = jest.fn();    
-    const { getByText, getByPlaceholderText } = render(
+    const { toJSON, debug } = render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
     );
-    const submitButton = getByText('Sign In');
-    const emailInput = getByPlaceholderText('Your email');
-    const passwordInput = getByPlaceholderText('Your password');
 
-    expect(submitButton).toBeDefined();
-    expect(emailInput).toBeDefined();
-    expect(passwordInput).toBeDefined();
+    expect(toJSON()).toMatchSnapshot();
   });
 
   test('User submits form with valid authorization data', () => {
-    // Setup SignIn component
     const signIn = jest.fn();
     const { getByText, getByPlaceholderText } = render(
       <AuthContext.Provider value={{signIn}}>
