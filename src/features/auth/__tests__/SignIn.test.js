@@ -42,7 +42,7 @@ describe('<SignIn />', () => {
     expect(signIn).toHaveBeenCalledWith(formData);
   });
 
-  test('Users submits form without email', () => {
+  test('User submits form without email', () => {
     const signIn = jest.fn();
     const { getByText, getByPlaceholderText } = render(
       <AuthContext.Provider value={{signIn}}>
@@ -56,7 +56,7 @@ describe('<SignIn />', () => {
     expect(getByText('Email is required')).toBeDefined();
   });
   
-  test('Users submits form without password', () => {
+  test('User submits form without password', () => {
     const signIn = jest.fn();
     const { getByText, getByPlaceholderText } = render(
       <AuthContext.Provider value={{signIn}}>
