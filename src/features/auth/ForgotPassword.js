@@ -45,12 +45,10 @@ export const ForgotPassword = ({ navigation }) => {
         other: ''
       }));
     } else {
-      const requestSent = await passwordReset(formData.email)
+      await passwordReset(formData.email)
       .catch((error) => {
         handleError(error.message);
       });
-
-      console.log(requestSent);
 
       if (requestSent) {
         setRequestSuccess(true);
@@ -83,7 +81,9 @@ export const ForgotPassword = ({ navigation }) => {
               <TextInput
                 style={formStyles.textInput}
                 keyboardType='email-address'
-                name='email' value={formData.email}
+                name='email'
+                placeholder='Email'
+                value={formData.email}
                 onChangeText={(text) => handleTextChange(text, 'email')}
               />
             </View>

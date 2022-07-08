@@ -92,4 +92,16 @@ describe('<SignIn />', () => {
       expect(getByText(errorMessage)).toBeDefined();
     });
   });
+
+  test('User navigates to Sign Up screen', () => {
+    const signIn = jest.fn();
+    render(
+      <AuthContext.Provider value={{signIn}}>
+        <SignIn/>
+      </AuthContext.Provider>
+    );
+
+    fireEvent.press(screen.getByText('Sign Up'));
+
+  });
 });
