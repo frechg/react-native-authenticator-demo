@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react-native';
 
 import { AuthContext } from '../../../common/contexts/AuthProvider';
 import { Navigation } from '../index';
-import { exportAllDeclaration } from '@babel/types';
 
 describe('<Navigation /> renders multiple states', () => {
   test('Renders with Splash screen when authState set to loading', () => {

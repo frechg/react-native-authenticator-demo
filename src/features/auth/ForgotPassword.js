@@ -45,7 +45,7 @@ export const ForgotPassword = ({ navigation }) => {
         other: ''
       }));
     } else {
-      await passwordReset(formData.email)
+      const requestSent = await passwordReset(formData.email)
       .catch((error) => {
         handleError(error.message);
       });

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react-native';
 
 import { ForgotPassword } from '../ForgotPassword';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
@@ -16,20 +16,27 @@ describe('<ForgotPassword />', () => {
     expect(screen.toJSON()).toMatchSnapshot();
   });
 
-  test('User submits form with valid data', () => {
-    const passwordReset = jest.fn();
+  test('User submits form with valid data', async () => {
+    const passwordReset = jest.fn().mockResolvedValue(true);
+
     render(
       <AuthContext.Provider value={{passwordReset}}>
         <ForgotPassword />
       </AuthContext.Provider>
     );
 
-    // Submit form data
     const email = 'person@example.com';
-    fireEvent.changeText(screen.getByPlaceholderText('Email'), email);
-    fireEvent.press(screen.getByText('Request Password Reset'));
+    const input = screen.getByPlaceholderText('Email');
+    const button = screen.getByText('Request Password Reset');
+    
+    fireEvent.changeText(input, email);
+    fireEvent.press(button);
 
     expect(passwordReset).toHaveBeenCalledWith(email);
+
+    await waitFor(() => {
+      expect(screen.getByText('Check your email for a link to reset your password.')).toBeTruthy();
+    });
   });
 
   test('User sees error when email is missing', () => {
@@ -46,10 +53,7 @@ describe('<ForgotPassword />', () => {
   });
 
   test('User sees error when request fails', async () => {
-    const errorMessage = 'Request failed';
-    const passwordReset = jest
-      .fn()
-      .mockRejectedValue(new Error(errorMessage))
+    const passwordReset = jest.fn().mockResolvedValue(false);
     
     render(
       <AuthContext.Provider value={{passwordReset}}>
@@ -57,11 +61,11 @@ describe('<ForgotPassword />', () => {
       </AuthContext.Provider>
     );
 
-    await waitFor(() => {
-      fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
-      fireEvent.press(screen.getByText('Request Password Reset'));
+    fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
+    fireEvent.press(screen.getByText('Request Password Reset'));
 
-      expect(screen.getByText(errorMessage)).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Sorry, something went wrong.')).toBeTruthy();
     });
   });
 });
