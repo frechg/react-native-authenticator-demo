@@ -22,7 +22,7 @@ export const Navigation = (props) => {
         ) : authState.authToken === null ? (
           <>
             <Stack.Screen name='Sign In' component={SignIn} options={{headerShown: false}}/>
-            <Stack.Screen name='Sign Up' component={SignUp} />
+            <Stack.Screen name='Create Account' component={SignUp} />
             <Stack.Screen name='Forgot Password' component={ForgotPassword} />
           </>
         ) : (

@@ -89,8 +89,8 @@ export const SignIn = ({ navigation }) => {
           <TouchableOpacity style={styles.buttonPrimary} title='Sign In' onPress={() => handleSignIn()}>
             <Text style={styles.buttonPrimaryText}>Sign In</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonSecondary} title='Sign In' onPress={() => navigation.navigate('Sign Up')}>
-            <Text style={styles.buttonSecondaryText}>Sign Up</Text>
+          <TouchableOpacity style={styles.buttonSecondary} title='Create Account' onPress={() => navigation.navigate('Create Account')}>
+            <Text style={styles.buttonSecondaryText}>Create Account</Text>
           </TouchableOpacity>
           <View style={{marginTop: 10, flexDirection: 'row', justifyContent: 'center'}}>
             <Button title='Forgot Password' onPress={() => navigation.navigate('Forgot Password')} />

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>7/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">23.8% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>5/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">41.17% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>7/17</span>
             </div>
         
             
@@ -185,33 +185,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,6 +213,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -293,12 +293,12 @@ import {
 import { styles, formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 &nbsp;
-export const SignUp = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> navigation }) =&gt; {</span>
-  const [formData, setFormData] = <span class="cstat-no" title="statement not covered" >React.useState({username: '', email: '', password: ''});</span>
-  const [errors, setErrors] = <span class="cstat-no" title="statement not covered" >React.useState({username: '', email: '', password: '', other: ''});</span>
-  const { signUp } = <span class="cstat-no" title="statement not covered" >React.useContext(AuthContext);</span>
+export const SignUp = ({ navigation }) =&gt; {
+  const [formData, setFormData] = React.useState({username: '', email: '', password: ''});
+  const [errors, setErrors] = React.useState({username: '', email: '', password: '', other: ''});
+  const { signUp } = React.useContext(AuthContext);
 &nbsp;
-  const handleTextChange = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>ext, type) =&gt; {</span>
+  const handleTextChange = <span class="fstat-no" title="function not covered" >(t</span>ext, type) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setFormData(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
       ...prev,
       [type]: text,
@@ -310,7 +310,7 @@ export const SignUp = <span class="cstat-no" title="statement not covered" ><spa
     }));
   }
 &nbsp;
-  const handleSignUp = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+  const handleSignUp = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    if (!formData.username || !formData.email || !formData.password ) {</span>
 <span class="cstat-no" title="statement not covered" >      setErrors(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
         ...prev,
@@ -329,20 +329,20 @@ export const SignUp = <span class="cstat-no" title="statement not covered" ><spa
     }
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;KeyboardAvoidingView 
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : <span class="branch-1 cbranch-no" title="branch not covered" >"height"}</span>
       style={{flex: 1, backgroundColor: 'rgb(245,245,245)'}}
     &gt;
       &lt;TouchableWithoutFeedback onPress={Keyboard.dismiss}&gt;
         &lt;View style={formStyles.formWrapper}&gt;
           { errors.other ? (
-            &lt;View&gt;&lt;Text style={formStyles.formError}&gt;{ errors.other }&lt;/Text&gt;&lt;/View&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >            &lt;View&gt;&lt;Text style={formStyles.formError}&gt;{ errors.other }&lt;/Text&gt;&lt;/View&gt;</span>
           ) : &lt;&gt;&lt;/&gt; }
           &lt;View style={formStyles.fieldWrapper}&gt;
             &lt;Text style={formStyles.label}&gt;Username&lt;/Text&gt;
             { errors.username ? (
-              &lt;Text style={formStyles.formError}&gt;{errors.username}&lt;/Text&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;Text style={formStyles.formError}&gt;{errors.username}&lt;/Text&gt;</span>
             ) : &lt;&gt;&lt;/&gt; }
             &lt;TextInput
               style={formStyles.textInput}
@@ -355,7 +355,7 @@ export const SignUp = <span class="cstat-no" title="statement not covered" ><spa
           &lt;View style={formStyles.fieldWrapper}&gt;
             &lt;Text style={formStyles.label}&gt;Email&lt;/Text&gt;
             { errors.email ? (
-              &lt;Text style={formStyles.formError}&gt;{errors.email}&lt;/Text&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;Text style={formStyles.formError}&gt;{errors.email}&lt;/Text&gt;</span>
             ) : &lt;&gt;&lt;/&gt; }
             &lt;TextInput
               style={formStyles.textInput}
@@ -369,7 +369,7 @@ export const SignUp = <span class="cstat-no" title="statement not covered" ><spa
           &lt;View style={formStyles.fieldWrapper}&gt;
             &lt;Text style={formStyles.label}&gt;Password&lt;/Text&gt;
             { errors.password ? (
-              &lt;Text style={formStyles.formError}&gt;{errors.password}&lt;/Text&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;Text style={formStyles.formError}&gt;{errors.password}&lt;/Text&gt;</span>
             ) : &lt;&gt;&lt;/&gt; }
             &lt;TextInput
               style={formStyles.textInput}
@@ -394,7 +394,7 @@ export const SignUp = <span class="cstat-no" title="statement not covered" ><spa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jul 08 2022 20:04:49 GMT+0800 (Central Indonesia Time)
+                at Sat Jul 09 2022 19:32:09 GMT+0800 (Central Indonesia Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
