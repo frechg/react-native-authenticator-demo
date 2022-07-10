@@ -178,7 +178,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
           }
         }
       >
-        Sign Up
+        Create Account
       </Text>
     </View>
     <View
