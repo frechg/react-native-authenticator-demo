@@ -56,24 +56,32 @@ describe('<AuthProvider/>', () => {
   });
 
   test('provides signIn which updates authState', async () => {
-    
+    // Mock SecureStore
+    // Mock fetch response object
+    // Expect SecureStore to be called 2 times (with authToken and username)
+    // Expect authState to be updated
   });
 
   test('provides signUp which updates authState', async () => {
-    
+    // Mock SecureStore
+    // Mock fetch response object
+    // Expect SecureStore to be called 2 times (with authToken and username)
+    // Expect authState to be updated
   });
 
   test('provides signOut which updates authState', async () => {
-    
+    // Mock SecureStore
+    // Expect SecureStore to be called 2 times (with authToken and username)
+    // Expect authState to be updated
   });
 
   test('provides passwordReset', async () => {
-    // Mock fetch call
-
-    // Render
-
+    // Mock fetch response object
+    
+    // Render test component
     // Fire password reset
 
     // Expect fetch to be called
+    // Expect a passwordReset return value
   });
 });
