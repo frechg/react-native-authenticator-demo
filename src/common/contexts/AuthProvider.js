@@ -53,7 +53,7 @@ export const AuthProvider = (props) => {
     const response = await fetch(SIGN_IN_URL, {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({user: { email: data.email, password: data.password }})
     })
@@ -100,7 +100,7 @@ export const AuthProvider = (props) => {
     const response = await fetch(FORGOT_PASSWORD_URL, {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({password: {email: email}})
     })
