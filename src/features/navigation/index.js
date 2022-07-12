@@ -27,9 +27,7 @@ export const Navigation = (props) => {
           </>
         ) : (
           <>
-            <Stack.Screen name='Profile'>
-              { props => <Profile {...props} userName={authState.username} /> }
-            </Stack.Screen>
+            <Stack.Screen name='Profile' component={Profile} />
           </>
         )}
       </Stack.Navigator>
