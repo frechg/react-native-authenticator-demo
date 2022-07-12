@@ -1,43 +1,12 @@
 import React from 'react'
 import * as SecureStore from 'expo-secure-store';
 import { FORGOT_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from '../constants';
+import { initialAuthState, authStateReducer } from '../authStateReducer';
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = (props) => {
-  const [authState, authDispatch] = React.useReducer(
-    (state, action) => {
-      switch(action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...state,
-            isLoading: false,
-            authToken: action.token,
-            username: action.username
-          };
-        case 'SIGN_IN':
-          return {
-            ...state,
-            isSignout: false,
-            authToken: action.token,
-            username: action.username
-          };
-        case 'SIGN_OUT':
-          return {
-            ...state,
-            isSignout: true,
-            authToken: null,
-            username: null
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      authToken: null,
-      username: null
-    }
-  );
+  const [authState, authDispatch] = React.useReducer(authStateReducer, initialAuthState);
 
   const getAuthState = async () => {
     try {

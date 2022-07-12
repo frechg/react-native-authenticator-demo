@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-const initialAuthState = ({
+export const initialAuthState = ({
   isLoading: true,
   isSignout: false,
   authToken: null,
   username: null
 });
 
-const authStateReducer = (state, action) => {
+export const authStateReducer = (state, action) => {
   switch(action.type) {
     case 'RESTORE_TOKEN':
       return {
