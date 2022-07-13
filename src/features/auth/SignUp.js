@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { BasicTextInput } from '../../common/BasicTextInput';
 import { BasicSubmitButton } from '../../common/BasicSubmitButton';
-import { formStyles } from '../../common/styles';
+import { styles, formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 
@@ -41,7 +41,7 @@ export const SignUp = ({ navigation }) => {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{flex: 1, backgroundColor: 'rgb(245,245,245)'}}
+      style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>

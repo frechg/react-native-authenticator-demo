@@ -38,7 +38,7 @@ export const SignIn = ({ navigation }) => {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{flex: 1, backgroundColor: 'rgb(245,245,245)'}}
+      style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>

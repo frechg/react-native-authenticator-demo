@@ -12,7 +12,7 @@ import { Formik, Field } from 'formik';
 
 import { BasicTextInput } from '../../common/BasicTextInput';
 import { BasicSubmitButton } from '../../common/BasicSubmitButton';
-import { formStyles } from '../../common/styles';
+import { styles, formStyles } from '../../common/styles';
 
 export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
@@ -47,7 +47,7 @@ export const ForgotPassword = ({ navigation }) => {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{flex: 1, justifyContent: 'center', alignItems:'center', backgroundColor: 'rgb(245,245,245)'}}
+      style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>
