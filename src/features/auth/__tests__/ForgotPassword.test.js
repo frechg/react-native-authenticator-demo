@@ -27,19 +27,18 @@ describe('<ForgotPassword />', () => {
 
     const email = 'person@example.com';
     const input = screen.getByPlaceholderText('Email');
-    const button = screen.getByText('Request Password Reset');
+    const button = screen.getByText('Request password reset');
     
     fireEvent.changeText(input, email);
     fireEvent.press(button);
 
-    expect(passwordReset).toHaveBeenCalledWith(email);
-
     await waitFor(() => {
+      expect(passwordReset).toHaveBeenCalledWith(JSON.stringify({email: email}));
       expect(screen.getByText('Check your email for a link to reset your password.')).toBeTruthy();
     });
   });
 
-  test('User sees error when email is missing', () => {
+  test('User sees error when email is missing', async () => {
     const passwordReset = jest.fn();
     render(
       <AuthContext.Provider value={{passwordReset}}>
@@ -47,9 +46,11 @@ describe('<ForgotPassword />', () => {
       </AuthContext.Provider>
     );
 
-    fireEvent.press(screen.getByText('Request Password Reset'));
+    fireEvent.press(screen.getByText('Request password reset'));
 
-    expect(screen.getByText('Email is required')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeTruthy();
+    });
   });
 
   test('User sees error when request fails', async () => {
@@ -62,7 +63,7 @@ describe('<ForgotPassword />', () => {
     );
 
     fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
-    fireEvent.press(screen.getByText('Request Password Reset'));
+    fireEvent.press(screen.getByText('Request password reset'));
 
     await waitFor(() => {
       expect(screen.getByText('Sorry, something went wrong.')).toBeTruthy();

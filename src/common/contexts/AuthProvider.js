@@ -65,13 +65,13 @@ export const AuthProvider = (props) => {
     }
   };
 
-  const passwordReset = async (email) => {
+  const passwordReset = async (data) => {
     const response = await fetch(FORGOT_PASSWORD_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({password: {email: email}})
+      body: JSON.stringify({password: data})
     })
 
     if (response.ok) {
