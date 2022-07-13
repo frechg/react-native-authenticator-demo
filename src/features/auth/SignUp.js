@@ -9,43 +9,33 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { styles, formStyles } from '../../common/styles';
+import { BasicTextInput } from '../../common/BasicTextInput';
+import { BasicSubmitButton } from '../../common/BasicSubmitButton';
+import { formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
+import { Formik, Field } from 'formik';
 
 export const SignUp = ({ navigation }) => {
-  const [formData, setFormData] = React.useState({username: '', email: '', password: ''});
-  const [errors, setErrors] = React.useState({username: '', email: '', password: '', other: ''});
   const { signUp } = React.useContext(AuthContext);
 
-  const handleTextChange = (text, type) => {
-    setFormData((prev) => ({
-      ...prev,
-      [type]: text,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [type]: '',
-    }));
+  const validate = (values) => {
+    const errors = {}
+    if (!values.username) {
+      errors.username = 'Required';
+    }
+    if (!values.email) {
+      errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Invalid email address';
+    }
+    if (!values.password) {
+      errors.password = 'Required';
+    }
+    return errors;
   }
 
-  const handleSignUp = async () => {
-    if (!formData.username || !formData.email || !formData.password ) {
-      setErrors((prev) => ({
-        ...prev,
-        username: !formData.username ? 'Username is required' : '',
-        email: !formData.email ? 'Email is required' : '',
-        password: !formData.password ? 'Password is required' : '',
-        other: ''
-      }));
-    } else {
-      await signUp(formData).catch((error) => {
-        setErrors((prev) => ({
-          ...prev,
-          other: error.message
-        }));
-      });
-    }
+  const handleSubmit = async (values) => {
+    await signUp(values);
   }
 
   return (
@@ -55,53 +45,41 @@ export const SignUp = ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>
-          { errors.other ? (
-            <View><Text style={formStyles.formError}>{ errors.other }</Text></View>
-          ) : <></> }
-          <View style={formStyles.fieldWrapper}>
-            <Text style={formStyles.label}>Username</Text>
-            { errors.username ? (
-              <Text style={formStyles.formError}>{errors.username}</Text>
-            ) : <></> }
-            <TextInput
-              style={formStyles.textInput}
-              name='username'
-              placeholder='Username'
-              value={formData.username}
-              onChangeText={(text) => handleTextChange(text, 'username')}
-            />
-          </View>
-          <View style={formStyles.fieldWrapper}>
-            <Text style={formStyles.label}>Email</Text>
-            { errors.email ? (
-              <Text style={formStyles.formError}>{errors.email}</Text>
-            ) : <></> }
-            <TextInput
-              style={formStyles.textInput}
-              keyboardType='email-address'
-              name='email'
-              placeholder='Email'
-              value={formData.email}
-              onChangeText={(text) => handleTextChange(text, 'email')}
-            />
-          </View>
-          <View style={formStyles.fieldWrapper}>
-            <Text style={formStyles.label}>Password</Text>
-            { errors.password ? (
-              <Text style={formStyles.formError}>{errors.password}</Text>
-            ) : <></> }
-            <TextInput
-              style={formStyles.textInput}
-              secureTextEntry={true}
-              name='password'
-              placeholder='Password'
-              value={formData.password}
-              onChangeText={(text) => handleTextChange(text, 'password')}
-            />
-          </View>
-          <TouchableOpacity style={styles.buttonPrimary} title='Sign Up' onPress={() => handleSignUp()}>
-            <Text style={styles.buttonPrimaryText}>Sign Up</Text>
-          </TouchableOpacity>
+          <Formik
+            initialValues={{username: '', email: '', password: ''}}
+            validate={validate}
+            onSubmit={async (values, {setSubmitting, setStatus}) => {
+              await handleSubmit(values).catch((error) => {
+                setStatus(error.message)
+                setSubmitting(false);
+              });
+              setSubmitting(false);
+            }}
+          >
+            {({status}) => (
+              <View>
+                { status && <Text style={formStyles.formError}>{status}</Text> }
+                <Field
+                  component={BasicTextInput}
+                  name="username"
+                  placeholder="Username"
+                />
+                <Field
+                  component={BasicTextInput}
+                  name="email"
+                  placeholder="Email"
+                  keyboardType='email-address'
+                />
+                <Field
+                  component={BasicTextInput}
+                  name="password"
+                  placeholder="Password"
+                  secureTextEntry={true}
+                />
+                <BasicSubmitButton title='Sign Up' />
+              </View>
+            )}
+          </Formik>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

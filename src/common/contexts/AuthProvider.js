@@ -42,7 +42,7 @@ export const AuthProvider = (props) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({new_user: { ...data }})
+      body: JSON.stringify({new_user: data})
     })
     if (response.ok) {
       const jsonResponse = await response.json();
@@ -75,7 +75,6 @@ export const AuthProvider = (props) => {
     })
 
     if (response.ok) {
-      console.log('Mocked value resolved as expected');
       return true;
     } else {
       return false;

@@ -16,7 +16,7 @@ describe('<SignUp />', () => {
     expect(screen.toJSON()).toMatchSnapshot();
   });
 
-  test('User submits form with valid account data', () => {
+  test('User submits form with valid account data', async () => {
     const signUp = jest.fn();
     render(
       <AuthContext.Provider value={{signUp}}>
@@ -24,22 +24,21 @@ describe('<SignUp />', () => {
       </AuthContext.Provider>
     );
 
-    // Setup account data
     const username = 'person';
     const email = 'person@email.com';
     const password = 'testingpass';
 
-    // Enter and submit account data
     fireEvent.changeText(screen.getByPlaceholderText('Username'), username);
     fireEvent.changeText(screen.getByPlaceholderText('Email'), email);
     fireEvent.changeText(screen.getByPlaceholderText('Password'), password);
     fireEvent.press(screen.getByText('Sign Up'));
 
-    // Expect account data to be submitted
-    expect(signUp).toHaveBeenCalledWith({email: email, password: password, username: username});
+    await waitFor(() => {
+      expect(signUp).toHaveBeenCalledWith({username: username, email: email, password: password});
+    });
   });
 
-  test('User submits form without username', () => {
+  test('User submits form without username', async () => {
     const signUp = jest.fn();
     render(
       <AuthContext.Provider value={{signUp}}>
@@ -47,16 +46,16 @@ describe('<SignUp />', () => {
       </AuthContext.Provider>
     );
 
-    // Enter and submit account data
     fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@email.com');
     fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
     fireEvent.press(screen.getByText('Sign Up'));
 
-    // Expect account data to be submitted
-    expect(screen.getByText('Username is required')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeTruthy();
+    });
   });
 
-  test('User submits form without email', () => {
+  test('User submits form without email', async () => {
     const signUp = jest.fn();
     render(
       <AuthContext.Provider value={{signUp}}>
@@ -64,16 +63,16 @@ describe('<SignUp />', () => {
       </AuthContext.Provider>
     );
 
-    // Enter and submit account data
     fireEvent.changeText(screen.getByPlaceholderText('Username'), 'Person');
     fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
     fireEvent.press(screen.getByText('Sign Up'));
 
-    // Expect account data to be submitted
-    expect(screen.getByText('Email is required')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeTruthy();
+    });
   });
 
-  test('User submits form without password', () => {
+  test('User submits form without password', async () => {
     const signUp = jest.fn();
     render(
       <AuthContext.Provider value={{signUp}}>
@@ -81,13 +80,13 @@ describe('<SignUp />', () => {
       </AuthContext.Provider>
     );
 
-    // Enter and submit account data
     fireEvent.changeText(screen.getByPlaceholderText('Username'), 'Person');
     fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
     fireEvent.press(screen.getByText('Sign Up'));
 
-    // Expect account data to be submitted
-    expect(screen.getByText('Password is required')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeTruthy();
+    });
   });
 
   test('User sees error when sign up request fails', async () => {
@@ -102,14 +101,12 @@ describe('<SignUp />', () => {
       </AuthContext.Provider>
     );
 
-    await waitFor(() => {
-      // Enter and submit account data
-      fireEvent.changeText(screen.getByPlaceholderText('Username'), 'Person');
-      fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
-      fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
-      fireEvent.press(screen.getByText('Sign Up'));
+    fireEvent.changeText(screen.getByPlaceholderText('Username'), 'Person');
+    fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
+    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
+    fireEvent.press(screen.getByText('Sign Up'));
 
-      // Expect account data to be submitted
+    await waitFor(() => {
       expect(screen.getByText(errorMessage)).toBeTruthy();
     });
   });
