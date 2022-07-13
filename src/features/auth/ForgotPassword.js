@@ -19,7 +19,6 @@ import { BasicSubmitButton } from '../../common/BasicSubmitButton';
 
 export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
-  const [errors, setErrors] = React.useState({email: '', other: ''});
   const { passwordReset } = React.useContext(AuthContext);
 
   const validate = values => {
@@ -50,8 +49,7 @@ export const ForgotPassword = ({ navigation }) => {
   const testingSubmit = (values, {setSubmitting, setStatus}) => {
     setTimeout(() => {
       alert(JSON.stringify(values));
-      setSubmitting(false);
-      setStatus('Error');
+      navigation.navigate('Sign In', {message: 'Check your email for a link to reset your password.'});
     }, 2000);
   }
 

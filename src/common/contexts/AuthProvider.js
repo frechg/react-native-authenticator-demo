@@ -75,6 +75,7 @@ export const AuthProvider = (props) => {
     })
 
     if (response.ok) {
+      console.log('Mocked value resolved as expected');
       return true;
     } else {
       return false;

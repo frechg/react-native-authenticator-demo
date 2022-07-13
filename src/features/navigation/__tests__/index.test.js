@@ -64,6 +64,6 @@ describe('<Navigation /> allows user to navigate between screens', () => {
 
     fireEvent.press(screen.getByText('Forgot Password'));
 
-    expect(screen.getByText('Request Password Reset')).toBeTruthy();
+    expect(screen.getByText('Request password reset')).toBeTruthy();
   });
 });
