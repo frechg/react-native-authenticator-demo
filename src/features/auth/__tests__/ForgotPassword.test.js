@@ -53,6 +53,22 @@ describe('<ForgotPassword />', () => {
     });
   });
 
+  test('User sees error when email is invalid', async () => {
+    const passwordReset = jest.fn();
+    render(
+      <AuthContext.Provider value={{passwordReset}}>
+        <ForgotPassword />
+      </AuthContext.Provider>
+    );
+
+    fireEvent.changeText(screen.getByPlaceholderText('Email'), 'not_an_email');
+    fireEvent.press(screen.getByText('Request password reset'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Invalid email address')).toBeTruthy();
+    });
+  });
+
   test('User sees error when request fails', async () => {
     const passwordReset = jest.fn().mockResolvedValue(false);
     
