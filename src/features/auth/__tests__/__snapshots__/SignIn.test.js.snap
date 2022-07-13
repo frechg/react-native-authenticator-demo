@@ -34,117 +34,95 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
       }
     }
   >
-    <View
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "marginBottom": 24,
-          "width": "100%",
-        }
-      }
-    >
-      <Text
+    <View>
+      <View
         style={
           Object {
-            "color": "rgb(150,150,150)",
-            "fontWeight": "bold",
-            "marginBottom": 6,
-            "textTransform": "uppercase",
-          }
-        }
-      >
-        Email
-      </Text>
-      <TextInput
-        keyboardType="email-address"
-        name="email"
-        onChangeText={[Function]}
-        placeholder="Your email"
-        style={
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderColor": "rgb(120,120,120)",
-            "borderRadius": 6,
-            "borderWidth": 1,
-            "fontSize": 16,
-            "padding": 12,
+            "alignItems": "flex-start",
+            "marginBottom": 24,
             "width": "100%",
           }
         }
-        value=""
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "marginBottom": 24,
-          "width": "100%",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "rgb(150,150,150)",
-            "fontWeight": "bold",
-            "marginBottom": 6,
-            "textTransform": "uppercase",
-          }
-        }
       >
-        Password
-      </Text>
-      <TextInput
-        name="password"
-        onChangeText={[Function]}
-        placeholder="Your password"
-        secureTextEntry={true}
+        <TextInput
+          keyboardType="email-address"
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Email"
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "rgb(120,120,120)",
+              "borderRadius": 6,
+              "borderWidth": 1,
+              "fontSize": 16,
+              "padding": 12,
+              "width": "100%",
+            }
+          }
+          value=""
+        />
+      </View>
+      <View
         style={
           Object {
-            "backgroundColor": "#FFFFFF",
-            "borderColor": "rgb(120,120,120)",
-            "borderRadius": 6,
-            "borderWidth": 1,
-            "fontSize": 16,
-            "padding": 12,
+            "alignItems": "flex-start",
+            "marginBottom": 24,
             "width": "100%",
           }
         }
-        value=""
-      />
-    </View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#25273d",
-          "borderRadius": 6,
-          "opacity": 1,
-          "padding": 12,
-        }
-      }
-    >
-      <Text
+      >
+        <TextInput
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "rgb(120,120,120)",
+              "borderRadius": 6,
+              "borderWidth": 1,
+              "fontSize": 16,
+              "padding": 12,
+              "width": "100%",
+            }
+          }
+          value=""
+        />
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "color": "#FFFFFF",
-            "fontSize": 18,
+            "alignItems": "center",
+            "backgroundColor": "#25273d",
+            "borderRadius": 6,
+            "opacity": 1,
+            "padding": 12,
           }
         }
       >
-        Sign In
-      </Text>
+        <Text
+          style={
+            Object {
+              "color": "#FFFFFF",
+              "fontSize": 18,
+            }
+          }
+        >
+          Sign In
+        </Text>
+      </View>
     </View>
     <View
       accessible={true}

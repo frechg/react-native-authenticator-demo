@@ -24,7 +24,7 @@ export const AuthProvider = (props) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({user: { email: data.email, password: data.password }})
+      body: JSON.stringify({user: data})
     })
     if (response.ok) {
       const jsonResponse = await response.json();

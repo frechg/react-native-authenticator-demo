@@ -2,20 +2,17 @@ import React from 'react';
 import {
     Text,
     View,
-    TouchableOpacity,
-    TextInput,
     TouchableWithoutFeedback,
     Keyboard,
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
 import { AuthContext } from '../../common/contexts/AuthProvider';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Field } from 'formik';
 
 import { BasicTextInput } from '../../common/BasicTextInput';
-
-import { styles, formStyles } from '../../common/styles';
 import { BasicSubmitButton } from '../../common/BasicSubmitButton';
+import { formStyles } from '../../common/styles';
 
 export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
@@ -32,9 +29,10 @@ export const ForgotPassword = ({ navigation }) => {
   }
 
   const handleSubmit = async (values, {setSubmitting, setStatus}) => {
-    const requestSent = await passwordReset(JSON.stringify(values))
+    const requestSent = await passwordReset(values)
     .catch((error) => {
       setStatus(error.message);
+      setSubmitting(false);
     });
 
     if (requestSent) {
@@ -44,13 +42,6 @@ export const ForgotPassword = ({ navigation }) => {
     }
 
     setSubmitting(false);
-  }
-
-  const testingSubmit = (values, {setSubmitting, setStatus}) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values));
-      navigation.navigate('Sign In', {message: 'Check your email for a link to reset your password.'});
-    }, 2000);
   }
 
   return (
@@ -70,9 +61,9 @@ export const ForgotPassword = ({ navigation }) => {
               validate={validate}
               onSubmit={handleSubmit}
             >
-              {({status}) => (
+              {(formik) => (
                 <View>
-                  { status && <Text style={formStyles.formError}>{status}</Text> }
+                  { formik.status && <Text style={formStyles.formError}>{formik.status}</Text> }
                   <Field
                     component={BasicTextInput}
                     name='email'

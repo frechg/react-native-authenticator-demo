@@ -33,7 +33,7 @@ describe('<ForgotPassword />', () => {
     fireEvent.press(button);
 
     await waitFor(() => {
-      expect(passwordReset).toHaveBeenCalledWith(JSON.stringify({email: email}));
+      expect(passwordReset).toHaveBeenCalledWith({email: email});
       expect(screen.getByText('Check your email for a link to reset your password.')).toBeTruthy();
     });
   });

@@ -16,9 +16,9 @@ describe('<SignIn />', () => {
     expect(screen.toJSON()).toMatchSnapshot();
   });
 
-  test('User submits form with valid authorization data', () => {
+  test('User submits form with valid authorization data', async () => {
     const signIn = jest.fn();
-    const { getByText, getByPlaceholderText } = render(
+    render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
@@ -30,66 +30,70 @@ describe('<SignIn />', () => {
     const formData = {email: email, password: password};
 
     // Get the form elements
-    const emailInput = getByPlaceholderText('Your email');
-    const passwordInput = getByPlaceholderText('Your password');
-    const submitButton = getByText('Sign In');
+    const emailInput = screen.getByPlaceholderText('Email');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    const submitButton = screen.getByText('Sign In');
 
     // Enter data and submit form
     fireEvent.changeText(emailInput, email);
     fireEvent.changeText(passwordInput, password);
     fireEvent.press(submitButton);
 
-    expect(signIn).toHaveBeenCalledWith(formData);
+    await waitFor(() => {
+      expect(signIn).toHaveBeenCalledWith(formData);
+    });
   });
 
-  test('User submits form without email', () => {
+  test('User submits form without email', async () => {
     const signIn = jest.fn();
-    const { getByText, getByPlaceholderText } = render(
+    render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
     );
   
-    fireEvent.changeText(getByPlaceholderText('Your password'), 'testingpass');
-    fireEvent.press(getByText('Sign In'));
-  
-    expect(getByText('Email is required')).toBeDefined();
+    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
+    fireEvent.press(screen.getByText('Sign In'));
+    
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeDefined();
+    });
   });
   
-  test('User submits form without password', () => {
+  test('User submits form without password', async () => {
     const signIn = jest.fn();
-    const { getByText, getByPlaceholderText } = render(
+    render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
     );
 
-    fireEvent.changeText(getByPlaceholderText('Your email'), 'person@example.com');
-    fireEvent.press(getByText('Sign In'));
+    fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
+    fireEvent.press(screen.getByText('Sign In'));
 
-    expect(getByText('Password is required')).toBeDefined();
+    await waitFor(() => {
+      expect(screen.getByText('Required')).toBeDefined();
+    });
   });
 
   test('User sees error when sign in request fails', async () => {
-    // Mock signIn to reject with an error
     const errorMessage = 'Sign in failed';
     const signIn = jest
       .fn()
       .mockRejectedValue(new Error(errorMessage));
     
-    const { getByText, getByPlaceholderText } = render(
+    render(
       <AuthContext.Provider value={{signIn}}>
         <SignIn/>
       </AuthContext.Provider>
     );
 
+    fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');
+    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'testingpass');
+    fireEvent.press(screen.getByText('Sign In'));
+
     await waitFor(() => {
-      // Enter data and submit form
-      fireEvent.changeText(getByPlaceholderText('Your email'), 'person@example.com');
-      fireEvent.changeText(getByPlaceholderText('Your password'), 'testingpass');
-      fireEvent.press(getByText('Sign In'));
-      
-      expect(getByText(errorMessage)).toBeDefined();
+      expect(screen.getByText(errorMessage)).toBeDefined();
     });
   });
 });
