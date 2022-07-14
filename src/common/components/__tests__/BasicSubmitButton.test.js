@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
-import { Formik, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import { BasicSubmitButton } from '../BasicSubmitButton';
 
 jest.mock('formik');

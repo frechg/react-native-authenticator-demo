@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BasicTextInput /> Renders a basic text input 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "marginBottom": 24,
+      "width": "100%",
+    }
+  }
+>
+  <TextInput
+    style={
+      Object {
+        "borderBottomWidth": 1,
+        "borderColor": "rgb(140,140,140)",
+        "borderRadius": 0,
+        "color": "rgb(60,60,60)",
+        "fontSize": 18,
+        "paddingBottom": 12,
+        "paddingRight": 12,
+        "paddingTop": 12,
+        "width": "100%",
+      }
+    }
+    value=""
+  />
+</View>
+`;
+
+exports[`<BasicTextInput /> Renders a basic text input with label 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "marginBottom": 24,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "rgb(150,150,150)",
+        "fontWeight": "bold",
+        "marginBottom": 6,
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Email
+  </Text>
+  <TextInput
+    label="Email"
+    style={
+      Object {
+        "borderBottomWidth": 1,
+        "borderColor": "rgb(140,140,140)",
+        "borderRadius": 0,
+        "color": "rgb(60,60,60)",
+        "fontSize": 18,
+        "paddingBottom": 12,
+        "paddingRight": 12,
+        "paddingTop": 12,
+        "width": "100%",
+      }
+    }
+    value=""
+  />
+</View>
+`;
