@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { useFormikContext } from 'formik';
-import { styles } from './styles';
+import { styles } from '../styles';
 
 export const BasicSubmitButton = ({title, ...props}) => {
   const { handleSubmit, isSubmitting } = useFormikContext();

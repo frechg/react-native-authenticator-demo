@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
-import { formStyles } from './styles';
+import { formStyles } from '../styles';
 
 export const BasicTextInput = (props) => {
   const {

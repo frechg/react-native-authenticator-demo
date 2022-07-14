@@ -2,15 +2,13 @@ import React from 'react';
 import {
     Text,
     View,
-    TouchableOpacity,
-    TextInput,
     TouchableWithoutFeedback,
     Keyboard,
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { BasicTextInput } from '../../common/BasicTextInput';
-import { BasicSubmitButton } from '../../common/BasicSubmitButton';
+import { BasicTextInput } from '../../common/components/BasicTextInput';
+import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';

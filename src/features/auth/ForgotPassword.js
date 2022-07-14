@@ -11,8 +11,8 @@ import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
-import { BasicTextInput } from '../../common/BasicTextInput';
-import { BasicSubmitButton } from '../../common/BasicSubmitButton';
+import { BasicTextInput } from '../../common/components/BasicTextInput';
+import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
 
 export const ForgotPassword = ({ navigation }) => {
