@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -162,21 +162,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,17 +183,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,14 +209,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,28 +236,28 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { BasicTextInput } from '../../common/BasicTextInput';
-import { BasicSubmitButton } from '../../common/BasicSubmitButton';
+import { BasicTextInput } from '../../common/components/BasicTextInput';
+import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 &nbsp;
-export const SignIn = ({ navigation }) =&gt; {
-  const { signIn } = React.useContext(AuthContext);
+export const SignIn = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> navigation }) =&gt; {</span>
+  const { signIn } = <span class="cstat-no" title="statement not covered" >React.useContext(AuthContext);</span>
 &nbsp;
-  const validation = Yup.object({
+  const validation = <span class="cstat-no" title="statement not covered" >Yup.object({</span>
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().required('Required'),
   });
 &nbsp;
-  const handleSubmit = async (values) =&gt; {
-    await signIn(values)
+  const handleSubmit = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (values) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    await signIn(values)</span>
   }
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;KeyboardAvoidingView 
-      behavior={Platform.OS === "ios" ? "padding" : <span class="branch-1 cbranch-no" title="branch not covered" >"height"}</span>
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     &gt;
       &lt;TouchableWithoutFeedback onPress={Keyboard.dismiss}&gt;
@@ -265,16 +265,16 @@ export const SignIn = ({ navigation }) =&gt; {
           &lt;Formik
             initialValues={{email: '', password: ''}}
             validationSchema={validation}
-            onSubmit={async (values, {setSubmitting, setStatus}) =&gt; {
-              await handleSubmit(values).catch((error) =&gt; {
-                setStatus(error.message)
-                setSubmitting(false);
+            onSubmit={<span class="fstat-no" title="function not covered" >as</span>ync (values, {setSubmitting, setStatus}) =&gt; {
+<span class="cstat-no" title="statement not covered" >              await handleSubmit(values).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                setStatus(error.message)</span>
+<span class="cstat-no" title="statement not covered" >                setSubmitting(false);</span>
               });
-              setSubmitting(false);
+<span class="cstat-no" title="statement not covered" >              setSubmitting(false);</span>
             }}
           &gt;
-            {({status}) =&gt; (
-              &lt;View&gt;
+            {<span class="fstat-no" title="function not covered" >({</span>status}) =&gt; (
+<span class="cstat-no" title="statement not covered" >              &lt;View&gt;</span>
                 { status &amp;&amp; &lt;Text style={formStyles.formError}&gt;{status}&lt;/Text&gt; }
                 &lt;Field
                   component={BasicTextInput}
@@ -292,14 +292,14 @@ export const SignIn = ({ navigation }) =&gt; {
               &lt;/View&gt;
             )}
           &lt;/Formik&gt;
-          &lt;TouchableOpacity style={styles.buttonSecondary} title='Create Account' onPress={() =&gt; navigation.navigate('Create Account')}&gt;
+          &lt;TouchableOpacity style={styles.buttonSecondary} title='Create Account' onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigation.navigate('Create Account')}</span>&gt;
             &lt;Text style={styles.buttonSecondaryText}&gt;Create Account&lt;/Text&gt;
           &lt;/TouchableOpacity&gt;
           &lt;View style={{collr: 'rgb(100,100,100', marginTop: 10, flexDirection: 'row', justifyContent: 'center'}}&gt;
             &lt;Button
               title='Forgot Password'
               color='rgb(120,120,120)'
-              onPress={() =&gt; navigation.navigate('Forgot Password')}
+              onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigation.navigate('Forgot Password')}</span>
             /&gt;
           &lt;/View&gt;
         &lt;/View&gt;
@@ -313,7 +313,7 @@ export const SignIn = ({ navigation }) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jul 14 2022 16:06:56 GMT+0800 (Central Indonesia Time)
+                at Thu Jul 14 2022 17:02:14 GMT+0800 (Central Indonesia Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

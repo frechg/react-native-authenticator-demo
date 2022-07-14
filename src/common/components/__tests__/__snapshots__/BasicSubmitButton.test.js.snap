@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BasicSubmitButton /> Renders a basic submit button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "rgb(40,40,40)",
+      "borderRadius": 6,
+      "opacity": 1,
+      "padding": 12,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "rgb(255,255,255)",
+        "fontSize": 18,
+      }
+    }
+  >
+    Test Submit
+  </Text>
+</View>
+`;
