@@ -14,25 +14,16 @@ import { BasicSubmitButton } from '../../common/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
 
 export const SignUp = ({ navigation }) => {
   const { signUp } = React.useContext(AuthContext);
 
-  const validate = (values) => {
-    const errors = {}
-    if (!values.username) {
-      errors.username = 'Required';
-    }
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    if (!values.password) {
-      errors.password = 'Required';
-    }
-    return errors;
-  }
+  const validation = Yup.object({
+    username: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string().required('Required'),
+  });
 
   const handleSubmit = async (values) => {
     await signUp(values);
@@ -47,7 +38,7 @@ export const SignUp = ({ navigation }) => {
         <View style={formStyles.formWrapper}>
           <Formik
             initialValues={{username: '', email: '', password: ''}}
-            validate={validate}
+            validationSchema={validation}
             onSubmit={async (values, {setSubmitting, setStatus}) => {
               await handleSubmit(values).catch((error) => {
                 setStatus(error.message)

@@ -54,8 +54,9 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
           style={
             Object {
               "borderBottomWidth": 1,
-              "borderColor": "rgb(20,20,20)",
+              "borderColor": "rgb(140,140,140)",
               "borderRadius": 0,
+              "color": "rgb(60,60,60)",
               "fontSize": 18,
               "paddingBottom": 12,
               "paddingRight": 12,
@@ -83,8 +84,9 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
           style={
             Object {
               "borderBottomWidth": 1,
-              "borderColor": "rgb(20,20,20)",
+              "borderColor": "rgb(140,140,140)",
               "borderRadius": 0,
+              "color": "rgb(60,60,60)",
               "fontSize": 18,
               "paddingBottom": 12,
               "paddingRight": 12,
@@ -109,7 +111,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#000",
+            "backgroundColor": "rgb(40,40,40)",
             "borderRadius": 6,
             "opacity": 1,
             "padding": 12,
@@ -119,7 +121,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
         <Text
           style={
             Object {
-              "color": "#fff",
+              "color": "rgb(255,255,255)",
               "fontSize": 18,
             }
           }
@@ -142,7 +144,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgb(200,200,200)",
+          "backgroundColor": "rgb(220,220,220)",
           "borderRadius": 6,
           "marginTop": 12,
           "opacity": 1,
@@ -153,7 +155,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
       <Text
         style={
           Object {
-            "color": "rgb(20,20,20)",
+            "color": "rgb(60,60,60)",
             "fontSize": 18,
           }
         }
@@ -164,6 +166,7 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
     <View
       style={
         Object {
+          "collr": "rgb(100,100,100",
           "flexDirection": "row",
           "justifyContent": "center",
           "marginTop": 10,
@@ -203,6 +206,9 @@ exports[`<SignIn /> Renders SignIn screen 1`] = `
                   "fontSize": 18,
                   "margin": 8,
                   "textAlign": "center",
+                },
+                Object {
+                  "color": "rgb(120,120,120)",
                 },
               ]
             }
