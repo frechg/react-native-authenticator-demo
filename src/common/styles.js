@@ -8,26 +8,29 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonPrimary: {
-    backgroundColor: '#000',
+    backgroundColor: 'rgb(40,40,40)',
     borderRadius: 6,
     alignItems: 'center',
     padding: 12,
   },
   buttonPrimaryText: {
-    color: '#fff',
+    color: 'rgb(255,255,255)',
     fontSize: 18,
   },
   buttonSecondary: {
-    backgroundColor: 'rgb(200,200,200)',
+    backgroundColor: 'rgb(220,220,220)',
     borderRadius: 6,
     alignItems: 'center',
     padding: 12,
     marginTop: 12,
   },
   buttonSecondaryText: {
-    color: 'rgb(20,20,20)',
+    color: 'rgb(60,60,60)',
     fontSize: 18,
   },
+  buttonLink: {
+    color: 'rgb(100,100,100)',
+  }
 });
 
 export const formStyles = StyleSheet.create({
@@ -38,8 +41,8 @@ export const formStyles = StyleSheet.create({
     width: '100%',
   },
   formError: {
-    color: 'red',
-    marginBottom: 6,
+    color: 'rgb(250,0,0)',
+    marginTop: 6,
   },
   fieldWrapper: {
     alignItems: 'flex-start',
@@ -53,12 +56,13 @@ export const formStyles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   textInput: {
+    color: 'rgb(60,60,60)',
     paddingTop: 12,
     paddingBottom: 12,
     paddingRight: 12,
     fontSize: 18,
     borderBottomWidth: 1,
-    borderColor: 'rgb(20,20,20)',
+    borderColor: 'rgb(140,140,140)',
     borderRadius: 0,
     width: '100%',
   },

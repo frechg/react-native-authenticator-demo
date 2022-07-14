@@ -75,8 +75,12 @@ export const SignIn = ({ navigation }) => {
           <TouchableOpacity style={styles.buttonSecondary} title='Create Account' onPress={() => navigation.navigate('Create Account')}>
             <Text style={styles.buttonSecondaryText}>Create Account</Text>
           </TouchableOpacity>
-          <View style={{marginTop: 10, flexDirection: 'row', justifyContent: 'center'}}>
-            <Button title='Forgot Password' onPress={() => navigation.navigate('Forgot Password')} />
+          <View style={{collr: 'rgb(100,100,100', marginTop: 10, flexDirection: 'row', justifyContent: 'center'}}>
+            <Button
+              title='Forgot Password'
+              color='rgb(120,120,120)'
+              onPress={() => navigation.navigate('Forgot Password')}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>

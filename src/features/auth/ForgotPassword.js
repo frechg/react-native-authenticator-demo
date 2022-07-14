@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
 
 import { BasicTextInput } from '../../common/BasicTextInput';
 import { BasicSubmitButton } from '../../common/BasicSubmitButton';
@@ -18,15 +19,9 @@ export const ForgotPassword = ({ navigation }) => {
   const [isRequestSuccess, setRequestSuccess] = React.useState(false);
   const { passwordReset } = React.useContext(AuthContext);
 
-  const validate = values => {
-    const errors = {}
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    return errors;
-  }
+  const validation = Yup.object({
+    email: Yup.string().email('Invalid email address').required('Required')
+  });
 
   const handleSubmit = async (values, {setSubmitting, setStatus}) => {
     const requestSent = await passwordReset(values)
@@ -58,7 +53,7 @@ export const ForgotPassword = ({ navigation }) => {
           ) :
             <Formik
               initialValues={{email: ''}}
-              validate={validate}
+              validationSchema={validation}
               onSubmit={handleSubmit}
             >
               {(formik) => (
