@@ -24,8 +24,12 @@ export const SignIn = ({ navigation }) => {
     password: Yup.string().required('Required'),
   });
 
-  const handleSubmit = async (values) => {
-    await signIn(values)
+  const handleSubmit = async (values, {setSubmitting, setStatus}) => {
+    await signIn(values).catch((error) => {
+      setStatus(error.message)
+      setSubmitting(false);
+    });
+    setSubmitting(false);
   }
 
   return (
@@ -38,13 +42,7 @@ export const SignIn = ({ navigation }) => {
           <Formik
             initialValues={{email: '', password: ''}}
             validationSchema={validation}
-            onSubmit={async (values, {setSubmitting, setStatus}) => {
-              await handleSubmit(values).catch((error) => {
-                setStatus(error.message)
-                setSubmitting(false);
-              });
-              setSubmitting(false);
-            }}
+            onSubmit={handleSubmit}
           >
             {({status}) => (
               <View>

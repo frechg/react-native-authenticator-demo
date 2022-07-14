@@ -17,7 +17,7 @@ describe('<SignUp />', () => {
   });
 
   test('User submits form with valid account data', async () => {
-    const signUp = jest.fn();
+    const signUp = jest.fn().mockResolvedValue();
     render(
       <AuthContext.Provider value={{signUp}}>
         <SignUp />
