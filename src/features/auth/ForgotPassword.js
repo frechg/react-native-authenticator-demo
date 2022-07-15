@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import { BasicTextInput } from '../../common/components/BasicTextInput';
 import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
-import * as Api from '../../services/auth';
+import * as Api from '../../services/Auth';
 
 export const ForgotPassword = ({ navigation }) => {
   const validation = Yup.object({

@@ -3,13 +3,11 @@ import { View, Text, Button } from 'react-native';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 
 import * as SecureStore from 'expo-secure-store';
-import * as Api from '../../../services/auth';
+import * as Api from '../../../services/Auth';
 import { AuthContext, AuthProvider } from '../AuthProvider';
-import { SIGN_IN_URL, SIGN_UP_URL } from '../../constants';
 
 jest.mock('expo-secure-store');
 jest.mock('../../../services/auth');
-global.fetch = jest.fn();
 
 const TestComponent = (props) => {
   const { authState, getAuthState, signIn, signUp, signOut } = React.useContext(AuthContext);
@@ -30,10 +28,6 @@ const TestComponent = (props) => {
 };
 
 describe('<AuthProvider/>', () => {
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
   test('Provides getAuthState which updates authState', async () => {
     const token = '123';
     const username = 'person';

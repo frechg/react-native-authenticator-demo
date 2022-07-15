@@ -2,8 +2,7 @@ import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import { ForgotPassword } from '../ForgotPassword';
-import { AuthContext } from '../../../common/contexts/AuthProvider';
-import * as Api from '../../../services/auth';
+import * as Api from '../../../services/Auth';
 
 jest.spyOn(Alert, 'alert');
 jest.mock('../../../services/auth');

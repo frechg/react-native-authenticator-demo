@@ -1,7 +1,7 @@
 import React from 'react'
 import * as SecureStore from 'expo-secure-store';
 import { initialAuthState, authStateReducer } from '../authStateReducer';
-import * as Api from '../../services/auth';
+import * as Api from '../../services/Auth';
 
 export const AuthContext = React.createContext();
 
