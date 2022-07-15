@@ -7,22 +7,20 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
-import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { BasicTextInput } from '../../common/components/BasicTextInput';
 import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
+import * as Api from '../../services/auth';
 
 export const ForgotPassword = ({ navigation }) => {
-  const { passwordReset } = React.useContext(AuthContext);
-
   const validation = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required')
   });
 
   const handleSubmit = async (values, {setSubmitting}) => {
-    await passwordReset(values)
+    await Api.passwordReset(values)
     .then((response) => {
       if (response.ok) {
         Alert.alert(

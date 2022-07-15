@@ -3,29 +3,29 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react-nativ
 import { Alert } from 'react-native';
 import { ForgotPassword } from '../ForgotPassword';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
+import * as Api from '../../../services/auth';
 
 jest.spyOn(Alert, 'alert');
+jest.mock('../../../services/auth');
 
 describe('<ForgotPassword />', () => {
+  beforeEach(() => {
+    Api.passwordReset.mockClear();
+  });
+
   test('Render ForgotPassword screen', () => {
-    const passwordReset = jest.fn();
     render(
-      <AuthContext.Provider value={{passwordReset}}>
-        <ForgotPassword />
-      </AuthContext.Provider>
+      <ForgotPassword />
     );
 
     expect(screen.toJSON()).toMatchSnapshot();
   });
 
   test('User submits form with valid data', async () => {
-    const passwordReset = jest.fn().mockResolvedValue({ok: true});
-
+    Api.passwordReset.mockResolvedValue({ok: true});
 
     render(
-      <AuthContext.Provider value={{passwordReset}}>
-        <ForgotPassword />
-      </AuthContext.Provider>
+      <ForgotPassword />
     );
 
     const email = 'person@example.com';
@@ -36,7 +36,7 @@ describe('<ForgotPassword />', () => {
     fireEvent.press(button);
 
     await waitFor(() => {
-      expect(passwordReset).toHaveBeenCalledWith({email: email});
+      expect(Api.passwordReset).toHaveBeenCalledWith({email: email});
       expect(Alert.alert).toHaveBeenCalledWith(
         'Success',
         'Check your email for a link to reset your password.',
@@ -46,11 +46,8 @@ describe('<ForgotPassword />', () => {
   });
 
   test('User sees error when email is missing', async () => {
-    const passwordReset = jest.fn();
     render(
-      <AuthContext.Provider value={{passwordReset}}>
-        <ForgotPassword />
-      </AuthContext.Provider>
+      <ForgotPassword />
     );
 
     fireEvent.press(screen.getByText('Request password reset'));
@@ -61,11 +58,8 @@ describe('<ForgotPassword />', () => {
   });
 
   test('User sees error when email is invalid', async () => {
-    const passwordReset = jest.fn();
     render(
-      <AuthContext.Provider value={{passwordReset}}>
-        <ForgotPassword />
-      </AuthContext.Provider>
+      <ForgotPassword />
     );
 
     fireEvent.changeText(screen.getByPlaceholderText('Email'), 'not_an_email');
@@ -78,12 +72,10 @@ describe('<ForgotPassword />', () => {
 
   test('User sees error when request fails', async () => {
     Alert.alert.mockClear();
-    const passwordReset = jest.fn().mockResolvedValue({ok: false});
+    Api.passwordReset.mockResolvedValue({ok: false});
     
     render(
-      <AuthContext.Provider value={{passwordReset}}>
-        <ForgotPassword />
-      </AuthContext.Provider>
+      <ForgotPassword />
     );
 
     fireEvent.changeText(screen.getByPlaceholderText('Email'), 'person@example.com');

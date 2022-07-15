@@ -3,14 +3,16 @@ import { View, Text, Button } from 'react-native';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 
 import * as SecureStore from 'expo-secure-store';
+import * as Api from '../../../services/auth';
 import { AuthContext, AuthProvider } from '../AuthProvider';
-import { FORGOT_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from '../../constants';
+import { SIGN_IN_URL, SIGN_UP_URL } from '../../constants';
 
 jest.mock('expo-secure-store');
+jest.mock('../../../services/auth');
 global.fetch = jest.fn();
 
 const TestComponent = (props) => {
-  const { authState, getAuthState, signIn, signUp, signOut, passwordReset } = React.useContext(AuthContext);
+  const { authState, getAuthState, signIn, signUp, signOut } = React.useContext(AuthContext);
   return (
     <View>
       <View>
@@ -23,7 +25,6 @@ const TestComponent = (props) => {
       <Button title='Sign In' onPress={() => signIn({})} />
       <Button title='Sign Up' onPress={() => signUp({})} />
       <Button title='Sign Out' onPress={() => signOut()} />
-      <Button title='Password Reset' onPress={() => passwordReset({})} />
     </View>
   );
 };
@@ -33,7 +34,7 @@ describe('<AuthProvider/>', () => {
     fetch.mockClear();
   });
 
-  test('provides getAuthState which updates authState', async () => {
+  test('Provides getAuthState which updates authState', async () => {
     const token = '123';
     const username = 'person';
     SecureStore.getItemAsync
@@ -61,7 +62,7 @@ describe('<AuthProvider/>', () => {
     const token = '123';
     const username = 'person';
 
-    fetch.mockResolvedValue({
+    Api.signIn.mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({token: token, username: username}),
     });
@@ -75,7 +76,7 @@ describe('<AuthProvider/>', () => {
     fireEvent.press(screen.getByText('Sign In'));
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(SIGN_IN_URL, expect.anything());
+      expect(Api.signIn).toHaveBeenCalled();
       expect(SecureStore.setItemAsync).toHaveBeenCalledWith('authToken', token);
       expect(SecureStore.setItemAsync).toHaveBeenCalledWith('username', username);
       expect(screen.getByText(token)).toBeTruthy();
@@ -87,7 +88,7 @@ describe('<AuthProvider/>', () => {
     const token = '123';
     const username = 'person';
 
-    fetch.mockResolvedValue({
+    Api.signUp.mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({token: token, username: username}),
     });
@@ -101,7 +102,7 @@ describe('<AuthProvider/>', () => {
     fireEvent.press(screen.getByText('Sign Up'));
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(SIGN_UP_URL, expect.anything());
+      expect(Api.signUp).toHaveBeenCalled();
       expect(SecureStore.setItemAsync).toHaveBeenCalledWith('authToken', token);
       expect(SecureStore.setItemAsync).toHaveBeenCalledWith('username', username);
       expect(screen.getByText(token)).toBeTruthy();
@@ -123,22 +124,6 @@ describe('<AuthProvider/>', () => {
     await waitFor(() => {
       expect(SecureStore.deleteItemAsync).toHaveBeenCalledTimes(2);
       expect(screen.getByText('Signed Out')).toBeTruthy();
-    });
-  });
-
-  test('provides passwordReset', async () => {
-    fetch.mockResolvedValue({ok: true});
-    
-    render(
-      <AuthProvider>
-        <TestComponent />
-      </AuthProvider>
-    );
-
-    fireEvent.press(screen.getByText('Password Reset'));
-
-    await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(FORGOT_PASSWORD_URL, expect.anything());
     });
   });
 });

@@ -1,7 +1,7 @@
 import React from 'react'
 import * as SecureStore from 'expo-secure-store';
-import { FORGOT_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from '../constants';
 import { initialAuthState, authStateReducer } from '../authStateReducer';
+import * as Api from '../../services/auth';
 
 export const AuthContext = React.createContext();
 
@@ -19,40 +19,32 @@ export const AuthProvider = (props) => {
   };
 
   const signIn = async (data) => {
-    const response = await fetch(SIGN_IN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({user: data})
+    await Api.signIn(data)
+    .then(async (response) => {
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        await SecureStore.setItemAsync('authToken', jsonResponse.token);
+        await SecureStore.setItemAsync('username', jsonResponse.username);
+        authDispatch({type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
+      } else {
+        throw new Error('Email or password are incorrect.');
+      }
     })
-    if (response.ok) {
-      const jsonResponse = await response.json();
-      await SecureStore.setItemAsync('authToken', jsonResponse.token);
-      await SecureStore.setItemAsync('username', jsonResponse.username);
-      authDispatch({type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
-    } else {
-      throw new Error('Email or password are incorrect.');
-    }
   };
 
   const signUp = async (data) => {
-    const response = await fetch(SIGN_UP_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({new_user: data})
-    })
-    if (response.ok) {
-      const jsonResponse = await response.json();
-      await SecureStore.setItemAsync('authToken', jsonResponse.token);
-      await SecureStore.setItemAsync('username', jsonResponse.username);
-      authDispatch({type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
-    } else {
-      const jsonResponse = await response.json();
-      throw new Error(jsonResponse.errors[0])
-    }
+    await Api.signUp(data)
+    .then(async (response) => {
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        await SecureStore.setItemAsync('authToken', jsonResponse.token);
+        await SecureStore.setItemAsync('username', jsonResponse.username);
+        authDispatch({type: 'SIGN_IN', token: jsonResponse.token, username: jsonResponse.username});
+      } else {
+        const jsonResponse = await response.json();
+        throw new Error(jsonResponse.errors[0])
+      }
+    });
   };
 
   const signOut = async () => {
@@ -65,18 +57,8 @@ export const AuthProvider = (props) => {
     }
   };
 
-  const passwordReset = async (data) => {
-    return await fetch(FORGOT_PASSWORD_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({password: data})
-    })
-  }
-
   const contextValue = React.useMemo(() => {
-    return {authState, getAuthState, signUp, signIn, signOut, passwordReset};
+    return {authState, getAuthState, signUp, signIn, signOut};
   }, [authState]);
 
   return (
