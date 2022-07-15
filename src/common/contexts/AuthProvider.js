@@ -66,19 +66,13 @@ export const AuthProvider = (props) => {
   };
 
   const passwordReset = async (data) => {
-    const response = await fetch(FORGOT_PASSWORD_URL, {
+    return await fetch(FORGOT_PASSWORD_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({password: data})
     })
-
-    if (response.ok) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   const contextValue = React.useMemo(() => {

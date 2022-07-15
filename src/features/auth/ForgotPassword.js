@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Alert,
     Text,
     View,
     TouchableWithoutFeedback,
@@ -10,31 +11,36 @@ import {
 import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-
 import { BasicTextInput } from '../../common/components/BasicTextInput';
 import { BasicSubmitButton } from '../../common/components/BasicSubmitButton';
 import { styles, formStyles } from '../../common/styles';
 
 export const ForgotPassword = ({ navigation }) => {
-  const [isRequestSuccess, setRequestSuccess] = React.useState(false);
   const { passwordReset } = React.useContext(AuthContext);
 
   const validation = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required')
   });
 
-  const handleSubmit = async (values, {setSubmitting, setStatus}) => {
-    const requestSent = await passwordReset(values)
+  const handleSubmit = async (values, {setSubmitting}) => {
+    await passwordReset(values)
+    .then((response) => {
+      if (response.ok) {
+        Alert.alert(
+          'Success',
+          'Check your email for a link to reset your password.',
+          [{
+            text: 'Ok',
+            onPress: () => navigation.navigate('Sign In')
+          }]
+        );
+      } else {
+        Alert.alert('Error', 'Password reset rquest failed.');
+      }
+    })
     .catch((error) => {
-      setStatus(error.message);
-      setSubmitting(false);
+      Alert.alert('Error', error.message);
     });
-
-    if (requestSent) {
-      setRequestSuccess(true);
-    } else {
-      setStatus('Sorry, something went wrong.');
-    }
 
     setSubmitting(false);
   }
@@ -46,30 +52,21 @@ export const ForgotPassword = ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={formStyles.formWrapper}>
-          { isRequestSuccess ? (
+          <Formik
+            initialValues={{email: ''}}
+            validationSchema={validation}
+            onSubmit={handleSubmit}
+          >
             <View>
-              <Text style={{padding: 32, textAlign: 'center'}}>Check your email for a link to reset your password.</Text>
+              <Field
+                component={BasicTextInput}
+                name='email'
+                placeholder='Email'
+                keyboardType='email-address'
+              />
+              <BasicSubmitButton title='Request password reset' />
             </View>
-          ) :
-            <Formik
-              initialValues={{email: ''}}
-              validationSchema={validation}
-              onSubmit={handleSubmit}
-            >
-              {(formik) => (
-                <View>
-                  { formik.status && <Text style={formStyles.formError}>{formik.status}</Text> }
-                  <Field
-                    component={BasicTextInput}
-                    name='email'
-                    placeholder='Email'
-                    keyboardType='email-address'
-                  />
-                  <BasicSubmitButton title='Request password reset' />
-                </View>
-              )}
-            </Formik>
-          }
+          </Formik>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react-native';
-
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
+import { Alert } from 'react-native';
 import { ForgotPassword } from '../ForgotPassword';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
 
+jest.spyOn(Alert, 'alert');
+
 describe('<ForgotPassword />', () => {
+  beforeEach(() => {
+
+  });
+
   test('Render ForgotPassword screen', () => {
     const passwordReset = jest.fn();
     render(
@@ -17,7 +23,8 @@ describe('<ForgotPassword />', () => {
   });
 
   test('User submits form with valid data', async () => {
-    const passwordReset = jest.fn().mockResolvedValue(true);
+    const passwordReset = jest.fn().mockResolvedValue({ok: true});
+
 
     render(
       <AuthContext.Provider value={{passwordReset}}>
@@ -34,7 +41,11 @@ describe('<ForgotPassword />', () => {
 
     await waitFor(() => {
       expect(passwordReset).toHaveBeenCalledWith({email: email});
-      expect(screen.getByText('Check your email for a link to reset your password.')).toBeTruthy();
+      expect(Alert.alert).toHaveBeenCalledWith(
+        'Success',
+        'Check your email for a link to reset your password.',
+        expect.anything()
+      );
     });
   });
 
@@ -70,7 +81,8 @@ describe('<ForgotPassword />', () => {
   });
 
   test('User sees error when request fails', async () => {
-    const passwordReset = jest.fn().mockResolvedValue(false);
+    Alert.alert.mockClear();
+    const passwordReset = jest.fn().mockResolvedValue({ok: false});
     
     render(
       <AuthContext.Provider value={{passwordReset}}>
@@ -82,7 +94,9 @@ describe('<ForgotPassword />', () => {
     fireEvent.press(screen.getByText('Request password reset'));
 
     await waitFor(() => {
-      expect(screen.getByText('Sorry, something went wrong.')).toBeTruthy();
+      expect(Alert.alert).toHaveBeenCalledWith(
+        'Error',
+        'Password reset rquest failed.');
     });
   });
 });
