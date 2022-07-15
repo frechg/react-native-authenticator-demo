@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Alert,
     Text,
     View,
     TouchableWithoutFeedback,
@@ -14,7 +15,7 @@ import { AuthContext } from '../../common/contexts/AuthProvider';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
-export const SignUp = ({ navigation }) => {
+export const SignUp = () => {
   const { signUp } = React.useContext(AuthContext);
 
   const validation = Yup.object({
@@ -23,10 +24,9 @@ export const SignUp = ({ navigation }) => {
     password: Yup.string().required('Required'),
   });
 
-  const handleSubmit = async (values, {setSubmitting, setStatus}) => {
+  const handleSubmit = async (values, {setSubmitting}) => {
     await signUp(values).catch((error) => {
-      setStatus(error.message)
-      setSubmitting(false);
+      Alert.alert('Error', error.message);
     });
     setSubmitting(false);
   }
@@ -43,29 +43,26 @@ export const SignUp = ({ navigation }) => {
             validationSchema={validation}
             onSubmit={handleSubmit}
           >
-            {({status}) => (
-              <View>
-                { status && <Text style={formStyles.formError}>{status}</Text> }
-                <Field
-                  component={BasicTextInput}
-                  name="username"
-                  placeholder="Username"
-                />
-                <Field
-                  component={BasicTextInput}
-                  name="email"
-                  placeholder="Email"
-                  keyboardType='email-address'
-                />
-                <Field
-                  component={BasicTextInput}
-                  name="password"
-                  placeholder="Password"
-                  secureTextEntry={true}
-                />
-                <BasicSubmitButton title='Sign Up' />
-              </View>
-            )}
+            <View>
+              <Field
+                component={BasicTextInput}
+                name="username"
+                placeholder="Username"
+              />
+              <Field
+                component={BasicTextInput}
+                name="email"
+                placeholder="Email"
+                keyboardType='email-address'
+              />
+              <Field
+                component={BasicTextInput}
+                name="password"
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <BasicSubmitButton title='Sign Up' />
+            </View>
           </Formik>
         </View>
       </TouchableWithoutFeedback>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import {
+    Alert,
     Text,
     View,
     Button,
@@ -26,8 +27,7 @@ export const SignIn = ({ navigation }) => {
 
   const handleSubmit = async (values, {setSubmitting, setStatus}) => {
     await signIn(values).catch((error) => {
-      setStatus(error.message)
-      setSubmitting(false);
+      Alert.alert('Error', error.message);
     });
     setSubmitting(false);
   }
@@ -44,24 +44,21 @@ export const SignIn = ({ navigation }) => {
             validationSchema={validation}
             onSubmit={handleSubmit}
           >
-            {({status}) => (
-              <View>
-                { status && <Text style={formStyles.formError}>{status}</Text> }
-                <Field
-                  component={BasicTextInput}
-                  name="email"
-                  placeholder="Email"
-                  keyboardType='email-address'
-                />
-                <Field
-                  component={BasicTextInput}
-                  name="password"
-                  placeholder="Password"
-                  secureTextEntry={true}
-                />
-                <BasicSubmitButton title='Sign In' />
-              </View>
-            )}
+            <View>
+              <Field
+                component={BasicTextInput}
+                name="email"
+                placeholder="Email"
+                keyboardType='email-address'
+              />
+              <Field
+                component={BasicTextInput}
+                name="password"
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <BasicSubmitButton title='Sign In' />
+            </View>
           </Formik>
           <TouchableOpacity style={styles.buttonSecondary} title='Create Account' onPress={() => navigation.navigate('Create Account')}>
             <Text style={styles.buttonSecondaryText}>Create Account</Text>

@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
-
+import { Alert } from 'react-native';
 import { SignIn } from '../SignIn';
 import { AuthContext } from '../../../common/contexts/AuthProvider';
+
+jest.spyOn(Alert, 'alert');
 
 describe('<SignIn />', () => {
   test('Renders SignIn screen', () => {
@@ -93,7 +95,7 @@ describe('<SignIn />', () => {
     fireEvent.press(screen.getByText('Sign In'));
 
     await waitFor(() => {
-      expect(screen.getByText(errorMessage)).toBeDefined();
+      expect(Alert.alert).toHaveBeenCalledWith('Error', expect.anything());
     });
   });
 });
