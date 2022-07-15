@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -93,14 +93,10 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,9 +105,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -120,9 +115,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,9 +125,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FORGOT_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from '../common/constants';
 &nbsp;
-// signIn requrest
-export const signIn = <span class="fstat-no" title="function not covered" >as</span>ync (data) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return await fetch(SIGN_IN_URL, {</span>
+export const signIn = async (data) =&gt; {
+  return await fetch(SIGN_IN_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -142,9 +135,8 @@ export const signIn = <span class="fstat-no" title="function not covered" >as</s
   })
 };
 &nbsp;
-// signUp request
-export const signUp = <span class="fstat-no" title="function not covered" >as</span>ync (data) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return await fetch(SIGN_UP_URL, {</span>
+export const signUp = async (data) =&gt; {
+  return await fetch(SIGN_UP_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -153,9 +145,8 @@ export const signUp = <span class="fstat-no" title="function not covered" >as</s
   })
 };
 &nbsp;
-// passwordReset request
-export const passwordReset = <span class="fstat-no" title="function not covered" >as</span>ync (data) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return await fetch(FORGOT_PASSWORD_URL, {</span>
+export const passwordReset = async (data) =&gt; {
+  return await fetch(FORGOT_PASSWORD_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -169,7 +160,7 @@ export const passwordReset = <span class="fstat-no" title="function not covered"
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jul 15 2022 16:51:44 GMT+0800 (Central Indonesia Time)
+                at Fri Jul 15 2022 16:55:44 GMT+0800 (Central Indonesia Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
