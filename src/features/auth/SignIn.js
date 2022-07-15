@@ -25,7 +25,7 @@ export const SignIn = ({ navigation }) => {
     password: Yup.string().required('Required'),
   });
 
-  const handleSubmit = async (values, {setSubmitting, setStatus}) => {
+  const handleSubmit = async (values, {setSubmitting}) => {
     await signIn(values).catch((error) => {
       Alert.alert('Error', error.message);
     });

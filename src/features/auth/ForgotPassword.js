@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Alert,
-    Text,
     View,
     TouchableWithoutFeedback,
     Keyboard,

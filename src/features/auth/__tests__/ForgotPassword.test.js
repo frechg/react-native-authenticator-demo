@@ -7,10 +7,6 @@ import { AuthContext } from '../../../common/contexts/AuthProvider';
 jest.spyOn(Alert, 'alert');
 
 describe('<ForgotPassword />', () => {
-  beforeEach(() => {
-
-  });
-
   test('Render ForgotPassword screen', () => {
     const passwordReset = jest.fn();
     render(
