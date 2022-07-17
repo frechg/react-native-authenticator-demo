@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<BasicSubmitButton /> Hides button title and shows loading indicator when submitting 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "rgb(40,40,40)",
+      "borderRadius": 6,
+      "opacity": 1,
+      "padding": 12,
+    }
+  }
+>
+  <ActivityIndicator
+    size="small"
+    style={
+      Object {
+        "marginVertical": 1,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`<BasicSubmitButton /> Renders a basic submit button 1`] = `
 <View
   accessible={true}

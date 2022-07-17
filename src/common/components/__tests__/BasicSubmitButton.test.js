@@ -46,7 +46,8 @@ describe('<BasicSubmitButton />', () => {
     )
     
     await waitFor(() => {
-      expect(screen.getByText('Submitting...')).toBeTruthy();
+      expect(screen.queryByText('Submit Test')).toBeFalsy();
+      expect(screen).toMatchSnapshot();
     });
   });
 });
