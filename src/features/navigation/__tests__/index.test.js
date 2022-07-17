@@ -14,7 +14,7 @@ describe('<Navigation /> renders multiple states', () => {
       </AuthContext.Provider>
     );
 
-    expect(screen.getByText('Loading...')).toBeTruthy();
+    expect(screen.getByTestId('LOADING')).toBeTruthy();
   });
 
   test('Renders SignIn if auth token not present', () => {

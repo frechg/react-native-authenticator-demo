@@ -11,8 +11,9 @@ exports[`<Splash /> Renders Splash screen 1`] = `
     }
   }
 >
-  <Text>
-    Loading...
-  </Text>
+  <ActivityIndicator
+    size="large"
+    testID="LOADING"
+  />
 </View>
 `;

@@ -18,7 +18,11 @@ export const Navigation = (props) => {
     <NavigationContainer>
       <Stack.Navigator>
         { authState.isLoading ? (
-          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen
+            name="Splash"
+            component={Splash}
+            options={{headerShown: false}}
+          />
         ) : authState.authToken === null ? (
           <>
             <Stack.Screen
