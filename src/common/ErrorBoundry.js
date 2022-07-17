@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
-import RNRestart from 'react-native-restart';
+import { styles } from './styles';
+import * as Updates from 'expo-updates';
 
 class ErrorBoundry extends React.Component {
   state = {
@@ -12,22 +13,20 @@ class ErrorBoundry extends React.Component {
   }
 
   handleBackToSignIn = async () => {
-    RNRestart.Restart();
+    await Updates.reloadAsync();
   }
 
   render () {
     if (this.state.error) {
       return (
-        <SafeAreaView>
-          <View>
-            <Text>Oops, something went wrong.</Text>
-            <Button>
-              title={'Back to Sign In Screen'}
-              onPress={() => this.handleBackToSignIn()}
-              style={{marginVertical: 15, }}
-            </Button>
-          </View>
-        </SafeAreaView>
+        <View style={styles.container}>
+          <Text>Oops, something went wrong.</Text>
+          <Button
+            title='Ok'
+            onPress={() => this.handleBackToSignIn()}
+            style={{marginVertical: 15, }}
+          />
+        </View>
       )
     } else {
       return this.props.children
