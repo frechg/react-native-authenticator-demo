@@ -7,7 +7,7 @@ import * as Api from '../../../services/Auth';
 import { AuthContext, AuthProvider } from '../AuthProvider';
 
 jest.mock('expo-secure-store');
-jest.mock('../../../services/auth');
+jest.mock('../../../services/Auth');
 
 const TestComponent = (props) => {
   const { authState, getAuthState, signIn, signUp, signOut } = React.useContext(AuthContext);
